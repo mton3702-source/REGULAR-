@@ -2,1463 +2,745 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>X LOCK</title>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>SERENITY LOCK</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
-body{background:radial-gradient(ellipse at 50% 0%,#4A0033 0%,#2A0020 40%,#0A0010 100%);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:12px;color:#ffe6f5;padding-top:max(12px,env(safe-area-inset-top))}
-.app{width:100%;max-width:440px;margin:0 auto;border-radius:28px;background:linear-gradient(160deg,rgba(80,0,60,.95),rgba(30,0,40,.98));box-shadow:0 0 0 1px #FF0080,0 0 35px #FF008088,0 0 70px #C700FF55;padding:22px 16px 24px}
-.logo-wrap{text-align:center;margin-bottom:20px}
-.logo-x{width:92px;height:92px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%,#FF008044,#2A0020);border-radius:50%;border:2.5px solid #FF0080;font-size:56px;font-weight:900;color:#FF0080;text-shadow:0 0 10px #FF0080,0 0 28px #C700FF;box-shadow:0 0 25px #FF0080,0 0 60px #C700FF88}
-.logo-name{font-size:36px;font-weight:900;letter-spacing:10px;color:#FF0080;text-shadow:0 0 8px #FF0080,0 0 22px #FF0080,0 0 44px #C700FF;margin-bottom:6px}
-.logo-tag{font-size:10px;letter-spacing:5px;color:#ff9ddb}
-.input-wrap{margin:22px 0 18px}
-.input-wrap label{display:block;font-size:11px;letter-spacing:3px;color:#ff9ddb;margin-bottom:10px;text-align:center}
-.key-input{width:100%;background:rgba(15,0,20,.92);border:2px solid #FF0080;border-radius:18px;padding:17px 14px;font-size:17px;font-weight:700;letter-spacing:1.5px;color:#FF0080;text-shadow:0 0 10px #FF0080;outline:none;text-align:center;box-shadow:0 0 22px #FF008066;-webkit-appearance:none}
-.key-input::placeholder{color:#a8558f;font-size:14px}
-.key-input:focus{border-color:#FF0080;box-shadow:0 0 0 1px #FF0080,0 0 35px #FF0080}
-.btn{display:block;width:100%;padding:17px;border:none;border-radius:18px;font-size:15px;font-weight:800;letter-spacing:2px;background:linear-gradient(135deg,#FF0080,#C700FF,#9D00CC);color:#fff;text-shadow:0 0 10px #fff;box-shadow:0 0 28px #FF0080,0 0 55px #C700FF99;cursor:pointer;-webkit-appearance:none;touch-action:manipulation;position:relative;overflow:hidden}
-.btn:active{transform:scale(.96)}
-.btn:disabled{background:linear-gradient(135deg,#3a1030,#2a0820);color:#7a4d70;text-shadow:none;box-shadow:none;cursor:not-allowed;opacity:.55}
-.btn-outline{background:rgba(255,0,128,.1);border:1.5px solid #FF0080;color:#FF0080;text-shadow:0 0 12px #FF0080}
-.btn-sm{padding:11px;font-size:12px;letter-spacing:1px;border-radius:12px}
-.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
-.btn.loading{color:transparent!important;pointer-events:none}
-.btn.loading::after{content:'';position:absolute;top:50%;left:50%;width:20px;height:20px;margin:-10px 0 0 -10px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
-@keyframes spin{100%{transform:rotate(360deg)}}
-.main-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:14px;margin-bottom:16px;border-bottom:2px solid #FF0080;gap:10px}
-.main-header .left-side{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1}
-.main-header .title{font-size:24px;font-weight:900;letter-spacing:6px;color:#FF0080;text-shadow:0 0 8px #FF0080,0 0 20px #C700FF}
-.device-id{font-size:8px;background:rgba(255,0,128,.12);border:1px solid #FF0080;border-radius:20px;padding:4px 9px;color:#ff9ddb;font-weight:700;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:fit-content}
-.header-timer{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0;padding:8px 11px;background:linear-gradient(135deg,rgba(255,0,128,.18),rgba(157,0,204,.14));border:1.5px solid #FF0080;border-radius:14px;box-shadow:0 0 18px #FF008066;min-width:112px}
-.header-timer .hdr-lbl{font-size:8px;letter-spacing:2px;color:#ff9ddb;font-weight:700;text-transform:uppercase}
-.header-timer .hdr-val{font-size:16px;font-weight:900;color:#FF0080;font-family:'SF Mono',Menlo,monospace;letter-spacing:1.5px;text-shadow:0 0 10px #FF0080,0 0 20px #C700FF;white-space:nowrap}
-.card{background:linear-gradient(150deg,rgba(90,0,70,.75),rgba(35,0,45,.9));border:1.5px solid #FF0080;border-radius:20px;padding:15px;margin-bottom:14px;box-shadow:0 0 22px #FF008077}
-.card.busy{box-shadow:0 0 0 2px #FF0080,0 0 40px #FF0080,inset 0 0 30px #FF008066}
-.card-title{font-size:11px;letter-spacing:3px;color:#ff9ddb;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:6px}
-.card-title .left{display:flex;align-items:center;gap:7px}
-.card-title .left::before{content:'';width:7px;height:7px;border-radius:50%;background:#FF0080;box-shadow:0 0 12px #FF0080}
-.card-title .toggle-btn{font-size:9px;padding:4px 9px;border-radius:20px;background:rgba(255,0,128,.2);border:1px solid #FF0080;color:#FF0080;cursor:pointer;font-weight:700}
-.dns-input-wrap{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px;padding-top:12px;border-top:1px dashed #FF008055}
-.dns-input-field{background:rgba(15,0,20,.9);border:1.5px solid #FF0080;border-radius:14px;padding:11px 12px}
-.dns-input-field .lbl{font-size:9px;color:#ff9ddb;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
-.dns-input-field input{width:100%;background:transparent;border:none;outline:none;color:#FF0080;font-size:15px;font-weight:800;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 10px #FF0080;-webkit-appearance:none}
-.dns-input-field input::placeholder{color:#7a3868;font-weight:500;font-size:13px}
-.dns-status{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;padding:10px 12px;border-radius:12px;font-size:11px;font-weight:700;background:rgba(255,0,128,.08);border:1px dashed #FF008066;color:#ff9ddb;min-height:38px;text-align:center}
-.dns-status.checking{background:rgba(255,0,128,.16);border-style:solid;border-color:#FF0080;color:#FF0080}
-.dns-status.success{background:rgba(0,255,140,.12);border-style:solid;border-color:#00FF8C;color:#00FF8C}
-.dns-status.error{background:rgba(255,60,90,.12);border-style:solid;border-color:#FF3C5A;color:#FF3C5A}
-.dns-spinner{width:14px;height:14px;border:2px solid rgba(255,0,128,.3);border-top-color:#FF0080;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
-.doh-row{display:flex;flex-direction:column;gap:5px;padding-top:12px;margin-top:12px;border-top:1px dashed #FF008055}
-.doh-row .lbl{font-size:11px;color:#ff9ddb}
-.doh-link{font-size:10px;color:#FF0080;text-decoration:none;word-break:break-all;font-family:'SF Mono',Menlo,monospace;border-bottom:1px dashed #FF0080;padding-bottom:3px;line-height:1.4}
-.json-status{margin-top:12px;padding:12px;background:rgba(10,0,15,.6);border-radius:14px;border-left:3px solid #00FF8C}
-.json-status-head{display:flex;align-items:center;gap:8px}
-#conn-dot{width:8px;height:8px;border-radius:50%;background:#ff9d00;box-shadow:0 0 10px #ff9d00;animation:blink 1.5s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
-#conn-status{font-size:11px;color:#ff9ddb;font-weight:700;letter-spacing:.5px}
-.json-values{margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.json-val-box{background:rgba(255,0,128,.08);border-radius:10px;padding:8px 10px;border:1px solid #FF008044}
-.json-val-box .lbl{font-size:9px;color:#ff9ddb;letter-spacing:1px}
-.json-val-box .val{font-size:13px;color:#FF0080;font-weight:800;font-family:'SF Mono',Menlo,monospace;margin-top:3px}
-.json-modules{margin-top:10px;display:flex;flex-direction:column;gap:5px}
-.json-mod-row{display:flex;justify-content:space-between;align-items:center}
-.json-mod-row .m-lbl{font-size:10px;color:#ff9ddb}
-.json-mod-row .m-val{font-size:10px;color:#7a4d70;font-weight:800}
-.bg-status{margin-top:12px;padding-top:12px;border-top:1px dashed #FF008055}
-.bg-status-row{display:flex;align-items:center;gap:8px;padding:7px 10px;background:rgba(10,0,15,.6);border-radius:10px;margin-bottom:6px;border-left:3px solid #FF0080}
-.bg-status-row:last-child{margin-bottom:0}
-.bg-status-row .dot{width:7px;height:7px;border-radius:50%;background:#00ff8c;box-shadow:0 0 8px #00ff8c;flex-shrink:0;animation:blink 1.5s ease-in-out infinite}
-.bg-status-row .name{font-size:10px;font-weight:800;color:#FF0080;letter-spacing:.5px;flex:1}
-.bg-status-row .val{font-size:9px;color:#ff9ddb;font-family:'SF Mono',Menlo,monospace;font-weight:700}
-.aim-editor{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed #FF008055}
-.aim-editor.open{display:block}
-.editor-title{font-size:10px;letter-spacing:2px;color:#ff9ddb;margin-bottom:6px;text-align:center}
-.editor-config{font-size:11px;font-weight:800;color:#FF0080;text-align:center;margin-bottom:10px;letter-spacing:.5px}
-.aim-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
-.aim-field{background:rgba(15,0,20,.85);border:1.5px solid #FF008088;border-radius:12px;padding:9px 11px}
-.aim-field .lbl{font-size:9px;color:#ff9ddb;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
-.aim-field input{width:100%;background:transparent;border:none;outline:none;color:#FF0080;font-size:15px;font-weight:800;font-family:'SF Mono',Menlo,monospace;-webkit-appearance:none}
-.aim-field select{width:100%;background:transparent;border:none;outline:none;color:#FF0080;font-size:14px;font-weight:800;font-family:'SF Mono',Menlo,monospace;-webkit-appearance:none}
-.aim-field select option{background:#2A0020;color:#FF0080}
-.aim-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.aim-save-note{font-size:9px;color:#ff9ddb;text-align:center;margin-top:8px;letter-spacing:.5px;line-height:1.5}
-.aim-save-note b{color:#00FF8C}
-.cfg-list{display:flex;flex-direction:column;gap:10px;max-height:520px;overflow-y:auto;padding-right:4px}
-.cfg-item{display:flex;flex-direction:column;gap:8px;background:rgba(15,0,20,.8);border:1.5px solid #FF008066;border-radius:16px;padding:13px;cursor:pointer;transition:all .25s;touch-action:manipulation;position:relative}
-.cfg-item:active{transform:scale(.98)}
-.cfg-item.selected{background:linear-gradient(135deg,rgba(255,0,128,.25),rgba(157,0,204,.2));border-color:#FF0080;box-shadow:0 0 0 1px #FF0080,0 0 26px #FF008077}
-.cfg-custom-badge{position:absolute;top:8px;right:8px;font-size:8px;background:rgba(0,255,140,.15);border:1px solid #00FF8C;color:#00FF8C;padding:2px 6px;border-radius:10px;font-weight:800;letter-spacing:.5px;z-index:1}
-.cfg-header{display:flex;align-items:center;gap:10px}
-.cfg-icon{font-size:10px;font-weight:900;width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(135deg,rgba(255,0,128,.25),rgba(157,0,204,.2));border:1px solid #FF0080;color:#FF0080;text-shadow:0 0 8px #FF0080;flex-shrink:0}
-.cfg-info{flex:1;min-width:0}
-.cfg-name{font-size:14px;font-weight:800;color:#ffe6f5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cfg-sub{font-size:10px;color:#ff9ddb;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cfg-item.selected .cfg-name{color:#FF0080;text-shadow:0 0 12px #FF0080}
-.cfg-item.selected .cfg-sub{color:#ffb8e6}
-.cfg-check{font-size:12px;font-weight:900;color:#00FF8C;opacity:0;width:26px;text-align:center;flex-shrink:0}
-.cfg-item.selected .cfg-check{opacity:1}
-.cfg-details{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding-top:8px;border-top:1px dashed #FF008044}
-.cfg-detail-item{background:rgba(10,0,15,.6);border-radius:8px;padding:6px 8px;border-left:2px solid #FF0080}
-.cfg-detail-item .lbl{font-size:8px;color:#ff9ddb;letter-spacing:1px;text-transform:uppercase}
-.cfg-detail-item .val{font-size:11px;color:#FF0080;font-weight:800;font-family:'SF Mono',Menlo,monospace;margin-top:2px;word-break:break-all}
-.cfg-doh-row{background:rgba(10,0,15,.6);border-radius:8px;padding:7px 9px;border-left:2px solid #C700FF;margin-top:2px}
-.cfg-doh-row .lbl{font-size:8px;color:#ff9ddb;letter-spacing:1px;text-transform:uppercase}
-.cfg-doh-row .val{font-size:10px;color:#C700FF;font-weight:700;font-family:'SF Mono',Menlo,monospace;margin-top:3px;word-break:break-all;line-height:1.3}
-.status-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;justify-content:center}
-.pill{font-size:9px;padding:5px 10px;border-radius:30px;background:rgba(255,0,128,.14);border:1px solid #FF008088;color:#FF0080;font-weight:700;display:flex;align-items:center;gap:5px}
-.pill .dot{width:6px;height:6px;border-radius:50%;background:#00ff8c;box-shadow:0 0 8px #00ff8c}
-.loading-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at center,#3A0033,#0A0010);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:22px;padding:30px}
-.loading-overlay.show{display:flex}
-.spinner-ring{width:120px;height:120px;border-radius:50%;border:5px solid transparent;border-top-color:#FF0080;border-right-color:#C700FF;animation:spin 1s linear infinite;box-shadow:0 0 40px #FF0080,0 0 80px #C700FF}
-.loading-title{font-size:22px;font-weight:900;letter-spacing:7px;color:#FF0080;text-shadow:0 0 12px #FF0080}
-.loading-sub{font-size:12px;letter-spacing:3px;color:#ff9ddb;text-align:center}
-.loading-count{font-size:44px;font-weight:900;color:#FF0080;font-family:'SF Mono',Menlo,monospace}
-.loading-bar{width:250px;height:7px;background:rgba(255,0,128,.15);border-radius:30px;overflow:hidden;border:1px solid #FF008088}
-.loading-bar-fill{height:100%;background:linear-gradient(90deg,#FF0080,#C700FF,#FF0080);width:0%;transition:width .3s linear}
-.mc-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at center,rgba(58,0,51,.98),rgba(10,0,16,.99));display:none;flex-direction:column;align-items:center;justify-content:center;z-index:9998;gap:20px;padding:30px}
-.mc-overlay.show{display:flex}
-.mc-spinner{width:110px;height:110px;position:relative}
-.mc-spinner::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:50%;border:3.5px solid transparent;border-top-color:#FF0080;border-right-color:#C700FF;animation:spin 1s linear infinite}
-.mc-spinner::after{content:'';position:absolute;top:15px;left:15px;right:15px;bottom:15px;border-radius:50%;border:3px solid transparent;border-bottom-color:#FF0080;border-left-color:#9D00CC;animation:spin 1.5s linear infinite reverse}
-.mc-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:32px;font-weight:900;color:#FF0080;text-shadow:0 0 16px #FF0080}
-.mc-title{font-size:18px;font-weight:900;letter-spacing:6px;color:#FF0080}
-.mc-percent{font-size:42px;font-weight:900;color:#FF0080;font-family:'SF Mono',Menlo,monospace}
-.mc-step{font-size:11px;letter-spacing:2px;color:#ff9ddb;text-align:center;min-height:16px}
-.mc-bar{width:280px;height:9px;background:rgba(255,0,128,.15);border-radius:30px;overflow:hidden;border:1px solid #FF008088}
-.mc-bar-fill{height:100%;background:linear-gradient(90deg,#FF0080,#C700FF,#FF0080);width:0%;transition:width .25s ease}
-.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(90px);background:linear-gradient(150deg,#3A0033,#1A0020);border:2px solid #FF0080;color:#FF0080;padding:14px 22px;border-radius:40px;font-weight:700;font-size:12.5px;box-shadow:0 0 30px #FF0080,0 0 60px #C700FF;z-index:10000;text-align:center;max-width:90%;transition:transform .35s,opacity .3s;opacity:0;pointer-events:none}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.hidden{display:none!important}
-.footer-note{font-size:9px;color:#8a3d70;text-align:center;margin-top:16px;letter-spacing:1.5px}
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html, body {
+    background:#000; color:#fff;
+    font-family:-apple-system, "SF Pro Text", Helvetica, Arial, sans-serif;
+    min-height:100vh; overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  body { padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+  .gold { color:#FFD700; }
+
+  .screen { display:none; min-height:100vh; padding:22px 18px 40px; }
+  .screen.active { display:flex; flex-direction:column; }
+
+  /* ===== LOCK SCREEN ===== */
+  #screenLock { align-items:center; justify-content:center; text-align:center; }
+  .logoX {
+    font-size:88px; font-weight:900; line-height:1;
+    color:#FFD700; text-shadow:0 0 10px #FFD700, 0 0 28px #FFA000, 0 0 48px rgba(255,160,0,.7);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { text-shadow:0 0 10px #FFD700, 0 0 28px #FFA000, 0 0 48px rgba(255,160,0,.7); }
+    50%     { text-shadow:0 0 16px #FFD700, 0 0 44px #FFB300, 0 0 70px rgba(255,179,0,.9); }
+  }
+  .brand {
+    margin-top:6px; font-size:22px; font-weight:800; letter-spacing:5px;
+    color:#FFD700; text-shadow:0 0 8px #FFD700, 0 0 20px rgba(255,179,0,.8);
+  }
+  .brand-sub { margin-top:4px; font-size:11px; letter-spacing:3px; color:#8a7a3a; }
+
+  .field { width:100%; max-width:340px; margin-top:34px; }
+  .field label { display:block; font-size:12px; color:#b8a45a; letter-spacing:1.5px; margin-bottom:8px; text-align:left; }
+  input.keyInput {
+    width:100%; padding:15px 14px; border-radius:14px;
+    background:#0d0d0d; border:1.5px solid #3a3312; color:#FFD700;
+    font-size:16px; letter-spacing:1px; text-align:center;
+    outline:none; transition:border .25s, box-shadow .25s;
+  }
+  input.keyInput:focus { border-color:#FFD700; box-shadow:0 0 12px rgba(255,215,0,.5); }
+  input.keyInput::placeholder { color:#4a4220; letter-spacing:2px; }
+
+  .btn {
+    display:block; width:100%; max-width:340px; margin-top:16px;
+    padding:16px; border:none; border-radius:999px; cursor:pointer;
+    font-size:16px; font-weight:800; letter-spacing:2px;
+    background:linear-gradient(180deg,#FFE066,#FFB300);
+    color:#1a1400; box-shadow:0 0 18px rgba(255,179,0,.55);
+    transition:transform .12s;
+  }
+  .btn:active { transform:scale(.97); }
+
+  .msg { margin-top:16px; font-size:14px; min-height:20px; letter-spacing:.5px; }
+  .msg.err { color:#ff4d4d; text-shadow:0 0 8px rgba(255,0,0,.6); }
+  .msg.ok  { color:#3dff88; text-shadow:0 0 8px rgba(0,255,120,.5); }
+  .msg.info{ color:#9a8f5a; }
+
+  .dataBadge {
+    margin-top:26px; font-size:13px; letter-spacing:1.5px; font-weight:800;
+    border:1.5px solid #2a240c; padding:12px 20px; border-radius:12px;
+    background:#080800; color:#7a6f3a; transition:all .4s;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .dataBadge.connected {
+    color:#3dff88; border-color:#1d5a35;
+    box-shadow:0 0 18px rgba(0,255,120,.35), inset 0 0 20px rgba(0,255,120,.08);
+    background:#04120a;
+    text-shadow:0 0 8px rgba(0,255,120,.6);
+  }
+  .dataBadge.connected .dot {
+    width:9px; height:9px; border-radius:50%; background:#3dff88;
+    box-shadow:0 0 10px #3dff88;
+    animation:blink 1.4s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.35;} }
+  .dataBadge.error { color:#ff4d4d; border-color:#5a1d1d; background:#120404; }
+  .dataBadge .sub {
+    display:block; font-size:10.5px; font-weight:600;
+    color:#7a8f7f; letter-spacing:1px; margin-top:2px;
+  }
+
+  /* ===== LOADING ===== */
+  #screenLoading { align-items:center; justify-content:center; text-align:center; }
+  .spinner {
+    width:74px; height:74px; border-radius:50%;
+    border:4px solid #2a2408; border-top-color:#FFD700;
+    animation:spin 1s linear infinite;
+    box-shadow:0 0 22px rgba(255,215,0,.4);
+  }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .loadTitle { margin-top:24px; font-size:20px; font-weight:800; letter-spacing:4px; color:#FFD700; }
+  .loadPct { margin-top:10px; font-size:34px; font-weight:900; color:#FFD700; text-shadow:0 0 12px rgba(255,179,0,.8); }
+  .loadBarWrap { width:240px; height:6px; background:#1a1505; border-radius:6px; margin-top:16px; overflow:hidden; }
+  .loadBar { height:100%; width:0%; background:linear-gradient(90deg,#FFD700,#FFA000); box-shadow:0 0 10px #FFB300; transition:width .3s; }
+  .loadStep { margin-top:14px; font-size:12px; color:#8a7a3a; letter-spacing:1.5px; min-height:16px; }
+
+  /* ===== MAIN SCREEN ===== */
+  #screenMain { padding-top:16px; }
+  .topbar {
+    display:flex; align-items:center; justify-content:space-between;
+    border:1.5px solid #3a3312; border-radius:16px; padding:12px 14px;
+    background:linear-gradient(180deg,#0c0c0c,#060606);
+    box-shadow:0 0 14px rgba(255,179,0,.12);
+  }
+  .topbar .miniX { font-size:26px; font-weight:900; color:#FFD700; text-shadow:0 0 8px #FFD700; }
+  .topbar .tt { font-size:12px; letter-spacing:2px; color:#c9b65a; }
+  .topbar .kv { font-size:11px; color:#8a7a3a; margin-top:3px; letter-spacing:1px; }
+  .topbar .right { text-align:right; }
+
+  .connCard {
+    margin-top:14px; padding:14px 16px; border-radius:16px;
+    display:flex; align-items:center; gap:12px;
+    background:linear-gradient(135deg, #04120a 0%, #07200f 100%);
+    border:1.5px solid #1d5a35;
+    box-shadow:0 0 20px rgba(0,255,120,.22), inset 0 0 24px rgba(0,255,120,.05);
+    position:relative; overflow:hidden;
+  }
+  .connCard::before {
+    content:""; position:absolute; top:0; left:-40%; width:40%; height:100%;
+    background:linear-gradient(90deg, transparent, rgba(61,255,136,.12), transparent);
+    animation:sweep 3s ease-in-out infinite;
+  }
+  @keyframes sweep { 0% { left:-40%; } 60%,100% { left:140%; } }
+  .connCard .pulseDot {
+    width:12px; height:12px; border-radius:50%; background:#3dff88;
+    box-shadow:0 0 12px #3dff88, 0 0 24px rgba(61,255,136,.6);
+    flex:0 0 auto; animation:blink 1.4s ease-in-out infinite;
+  }
+  .connCard .info { flex:1; text-align:left; }
+  .connCard .title {
+    font-size:13px; font-weight:900; letter-spacing:2px;
+    color:#3dff88; text-shadow:0 0 10px rgba(61,255,136,.7);
+  }
+  .connCard .detail {
+    margin-top:4px; font-size:10.5px; letter-spacing:.8px; color:#7a8f7f; font-weight:600;
+  }
+  .connCard .detail .gold { color:#FFD700; font-weight:800; }
+  .connCard .badgeType {
+    font-size:9px; font-weight:900; letter-spacing:1.5px;
+    padding:4px 9px; border-radius:999px;
+    background:rgba(61,255,136,.12); color:#3dff88;
+    border:1px solid rgba(61,255,136,.4);
+    text-transform:uppercase;
+  }
+
+  .sectionTitle {
+    margin:22px 0 10px; font-size:12px; letter-spacing:3px; color:#b8a45a;
+    display:flex; align-items:center; gap:8px;
+  }
+  .sectionTitle::before { content:""; width:14px; height:1.5px; background:#FFD700; box-shadow:0 0 6px #FFD700; }
+
+  .toggleRow {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 16px; margin-bottom:10px;
+    border:1.5px solid #2a2408; border-radius:16px;
+    background:linear-gradient(180deg,#0b0b0b,#050505);
+    transition:border .25s, box-shadow .25s;
+  }
+  .toggleRow.on { border-color:#FFD700; box-shadow:0 0 16px rgba(255,215,0,.28); }
+  .toggleRow .lbl { font-size:14px; font-weight:700; letter-spacing:1px; color:#e8dc9a; }
+  .toggleRow.on .lbl { color:#FFD700; }
+  .toggleRow .desc { font-size:10.5px; color:#7a6f3a; margin-top:3px; letter-spacing:.5px; }
+
+  .switch {
+    position:relative; width:54px; height:30px; border-radius:999px;
+    background:#1c1808; border:1.5px solid #3a3312; flex:0 0 auto;
+    transition:background .25s, border .25s, box-shadow .25s; cursor:pointer;
+  }
+  .switch::after {
+    content:""; position:absolute; top:2.5px; left:3px;
+    width:22px; height:22px; border-radius:50%;
+    background:#5a4d1a; transition:transform .25s, background .25s, box-shadow .25s;
+  }
+  .switch.on { background:#2a2205; border-color:#FFD700; box-shadow:0 0 12px rgba(255,215,0,.5); }
+  .switch.on::after { transform:translateX(23px); background:#FFD700; box-shadow:0 0 10px #FFD700; }
+
+  .statGrid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .statCard {
+    border:1.5px solid #2a2408; border-radius:14px; padding:12px 14px;
+    background:linear-gradient(180deg,#0b0b0b,#050505);
+  }
+  .statCard .k { font-size:10.5px; letter-spacing:1.5px; color:#8a7a3a; }
+  .statCard .v { margin-top:6px; font-size:20px; font-weight:900; color:#FFD700; text-shadow:0 0 8px rgba(255,179,0,.5); }
+  .statCard .v small { font-size:11px; color:#b8a45a; font-weight:600; }
+
+  /* ===== ĐỘ NHẠY — lưới 2 cột cho nhiều máy ===== */
+  .sensGrid {
+    display:grid; grid-template-columns:1fr 1fr; gap:8px;
+  }
+  .sensBtn {
+    padding:12px 8px; border-radius:14px; cursor:pointer;
+    background:#0b0b0b; border:1.5px solid #2a2408; color:#b8a45a;
+    font-size:12px; font-weight:700; letter-spacing:.3px; text-align:center;
+    transition:all .2s; line-height:1.3;
+  }
+  .sensBtn.on {
+    border-color:#FFD700; color:#FFD700; background:#141000;
+    box-shadow:0 0 14px rgba(255,215,0,.35);
+  }
+  .sensBtn .sVal {
+    display:block; font-size:9.5px; color:#7a6f3a; font-weight:600;
+    letter-spacing:1px; margin-top:2px;
+  }
+  .sensBtn.on .sVal { color:#b8a45a; }
+  .sensBtn:active { transform:scale(.96); }
+
+  .downloadBtn {
+    margin-top:24px; padding:18px; border-radius:999px; border:none; cursor:pointer;
+    background:linear-gradient(180deg,#FFE066,#FFB300); color:#1a1400;
+    font-size:15px; font-weight:900; letter-spacing:2px;
+    box-shadow:0 0 22px rgba(255,179,0,.55);
+  }
+
+  .logoutBtn {
+    margin-top:26px; padding:16px; border-radius:999px; cursor:pointer;
+    background:linear-gradient(180deg, #2a0a0a, #140404);
+    border:1.5px solid #5a1d1d; color:#ff6b6b;
+    font-size:14px; font-weight:800; letter-spacing:2.5px;
+    text-shadow:0 0 8px rgba(255,80,80,.5);
+    box-shadow:0 0 14px rgba(255,60,60,.15);
+    transition:all .2s;
+  }
+  .logoutBtn:active { transform:scale(.97); box-shadow:0 0 22px rgba(255,60,60,.4); border-color:#ff4d4d; }
+
+  .footNote { margin-top:14px; text-align:center; font-size:10px; color:#5a5228; letter-spacing:1.5px; }
+
+  /* ===== MODAL ===== */
+  .modalOverlay {
+    position:fixed; inset:0; background:rgba(0,0,0,.85);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display:none; align-items:center; justify-content:center;
+    z-index:1000; padding:20px; animation:fadeIn .25s ease;
+  }
+  .modalOverlay.show { display:flex; }
+  @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+  .modalBox {
+    width:100%; max-width:340px;
+    background:linear-gradient(180deg,#0e0e0e,#050505);
+    border:1.5px solid #5a1d1d; border-radius:20px;
+    padding:24px 20px 20px; text-align:center;
+    box-shadow:0 0 40px rgba(255,60,60,.25);
+    animation:popIn .3s cubic-bezier(.2,.9,.3,1.3);
+  }
+  @keyframes popIn { from{transform:scale(.85);opacity:0;} to{transform:scale(1);opacity:1;} }
+  .modalIcon { font-size:42px; line-height:1; margin-bottom:12px; filter: drop-shadow(0 0 12px rgba(255,80,80,.6)); }
+  .modalTitle { font-size:16px; font-weight:900; letter-spacing:2px; color:#ff6b6b; text-shadow:0 0 10px rgba(255,80,80,.5); }
+  .modalDesc { margin-top:10px; font-size:12.5px; color:#b8a45a; letter-spacing:.5px; line-height:1.5; }
+  .modalBtns { display:flex; gap:10px; margin-top:22px; }
+  .modalBtn {
+    flex:1; padding:14px; border-radius:999px; border:none; cursor:pointer;
+    font-size:13px; font-weight:800; letter-spacing:1.5px; transition:transform .12s;
+  }
+  .modalBtn:active { transform:scale(.96); }
+  .modalBtn.cancel { background:#1a1a1a; color:#b8a45a; border:1.5px solid #3a3312; }
+  .modalBtn.confirm { background:linear-gradient(180deg,#ff5555,#cc1f1f); color:#fff; box-shadow:0 0 18px rgba(255,60,60,.5); }
+
+  .toast {
+    position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(120%);
+    background:#141000; border:1.5px solid #FFD700; color:#FFD700;
+    padding:12px 22px; border-radius:999px; font-size:13px; font-weight:700;
+    letter-spacing:1px; box-shadow:0 0 22px rgba(255,215,0,.5);
+    transition:transform .35s cubic-bezier(.2,.9,.3,1.2); z-index:999; white-space:nowrap;
+  }
+  .toast.show { transform:translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
-<div class="app">
 
-<div id="keyScreen">
-    <div class="logo-wrap">
-        <div class="logo-x">X</div>
-        <div class="logo-name">X LOCK</div>
-        <div class="logo-tag">AIM · DNS · FREE FIRE</div>
-    </div>
-    <div class="input-wrap">
-        <label>NHẬP KEY KÍCH HOẠT</label>
-        <input type="text" id="keyInput" class="key-input" placeholder="XLOCK-XXXX-XXXX-FF" autocomplete="off" autocapitalize="characters" spellcheck="false">
-    </div>
-    <button class="btn" id="activateBtn" type="button">⚡ KÍCH HOẠT NGAY</button>
-    <div class="status-pills" style="margin-top:18px">
-        <span class="pill"><span class="dot"></span>GIỜ</span>
-        <span class="pill"><span class="dot"></span>TUẦN</span>
-        <span class="pill"><span class="dot"></span>THÁNG</span>
-        <span class="pill"><span class="dot"></span>VĨNH VIỄN</span>
-    </div>
-    <div class="footer-note">MỖI KEY · 1 THIẾT BỊ · BẢO MẬT CAO</div>
+<!-- ============ LOCK SCREEN ============ -->
+<div id="screenLock" class="screen active">
+  <div class="logoX">X</div>
+  <div class="brand">SERENITY LOCK</div>
+  <div class="brand-sub">PREMIUM ACCESS</div>
+
+  <div class="field">
+    <label>NHẬP KEY KÍCH HOẠT</label>
+    <input id="keyInput" class="keyInput" type="text" placeholder="SERENITY-XXXX-XXXX-FF"
+           autocomplete="off" autocapitalize="characters" spellcheck="false">
+  </div>
+
+  <button id="btnActivate" class="btn">KÍCH HOẠT</button>
+  <div id="lockMsg" class="msg info"></div>
+
+  <div id="dataBadge" class="dataBadge">
+    <span class="dot"></span>
+    <span id="badgeText">ĐANG KẾT NỐI...</span>
+  </div>
 </div>
 
-<div id="mainScreen" class="hidden">
-    <div class="main-header">
-        <div class="left-side">
-            <div class="title">X LOCK</div>
-            <div class="device-id" id="deviceId">ID: --------</div>
-        </div>
-        <div class="header-timer">
-            <div class="hdr-lbl">⏳ Còn lại</div>
-            <div class="hdr-val" id="timerValue">--:--:--</div>
-        </div>
-    </div>
-
-    <div class="card" id="dnsCard">
-        <div class="card-title">
-            <div class="left">🌐 CẤU HÌNH DNS &amp; AIM</div>
-            <div class="toggle-btn" id="aimToggle">✎ CHỈNH AIM</div>
-        </div>
-
-        <div class="dns-input-wrap">
-            <div class="dns-input-field">
-                <div class="lbl">🟣 DNS Chính</div>
-                <input type="text" id="dnsPrimaryInput" placeholder="10.10.34.1" autocomplete="off" spellcheck="false">
-            </div>
-            <div class="dns-input-field">
-                <div class="lbl">🟣 DNS Phụ</div>
-                <input type="text" id="dnsSecondaryInput" placeholder="1.1.1.1" autocomplete="off" spellcheck="false">
-            </div>
-        </div>
-
-        <button class="btn btn-sm" id="dnsApplyBtn" type="button" style="margin-top:10px">✓ ÁP DỤNG DNS</button>
-
-        <div class="dns-status" id="dnsStatus">
-            <div class="dns-spinner" id="dnsSpinner" style="display:none"></div>
-            <span id="dnsStatusText">Sẵn sàng</span>
-        </div>
-
-        <div class="doh-row">
-            <span class="lbl">🔗 DoH URL (máy chủ)</span>
-            <a class="doh-link" id="dohLink" href="https://jsonhosting.com/api/json/694fec6d/raw" target="_blank" rel="noopener">https://jsonhosting.com/api/json/694fec6d/raw</a>
-        </div>
-
-        <div class="json-status">
-            <div class="json-status-head">
-                <div id="conn-dot"></div>
-                <span id="conn-status">Đang kết nối X LOCK...</span>
-            </div>
-            <div class="json-values">
-                <div class="json-val-box"><div class="lbl">DNS CHÍNH</div><div id="cfg-dns-primary" class="val">--</div></div>
-                <div class="json-val-box"><div class="lbl">DNS PHỤ</div><div id="cfg-dns-secondary" class="val">--</div></div>
-                <div class="json-val-box"><div class="lbl">ĐỘ NHẠY</div><div id="cfg-sens" class="val">--</div></div>
-                <div class="json-val-box"><div class="lbl">BÁM ĐẦU</div><div id="cfg-head" class="val">--</div></div>
-                <div class="json-val-box"><div class="lbl">RUNG TÂM</div><div id="cfg-rungtam" class="val">--</div></div>
-                <div class="json-val-box"><div class="lbl">TRIGGER</div><div id="cfg-trig" class="val">--</div></div>
-            </div>
-            <div class="json-modules">
-                <div class="json-mod-row"><span class="m-lbl">Fix Rung Tâm</span><span class="m-val" id="cfg-onoff-rungtam">TẮT</span></div>
-                <div class="json-mod-row"><span class="m-lbl">Tăng Nhạy</span><span class="m-val" id="cfg-onoff-tangnhay">TẮT</span></div>
-                <div class="json-mod-row"><span class="m-lbl">JSON AIM</span><span class="m-val" id="cfg-onoff-jsonaim">TẮT</span></div>
-            </div>
-        </div>
-
-        <div class="bg-status">
-            <div style="font-size:10px;letter-spacing:2px;color:#ff9ddb;margin-bottom:8px">⚙️ MODULE CHẠY NGẦM</div>
-            <div class="bg-status-row"><div class="dot"></div><div class="name">FIX RUNG TÂM</div><div class="val" id="statusRungTam">OFF</div></div>
-            <div class="bg-status-row"><div class="dot"></div><div class="name">TĂNG NHẠY</div><div class="val" id="statusTangNhay">OFF</div></div>
-            <div class="bg-status-row"><div class="dot"></div><div class="name">JSON AIM</div><div class="val" id="statusJsonAim">OFF</div></div>
-        </div>
-
-        <div class="aim-editor" id="aimEditor">
-            <div class="editor-title">🎯 CHỈNH THÔNG SỐ AIM</div>
-            <div class="editor-config" id="aimEditorConfigName">📦 CHƯA CHỌN CẤU HÌNH</div>
-            <div class="aim-grid">
-                <div class="aim-field"><div class="lbl">Độ nhạy</div><input type="number" id="aimSens" value="135" min="135" max="200"></div>
-                <div class="aim-field"><div class="lbl">Bám đầu %</div><input type="number" id="aimHead" value="60" min="60" max="100"></div>
-                <div class="aim-field"><div class="lbl">Smooth</div><input type="number" id="aimSmooth" value="1.1" min="0.1" max="5" step="0.1"></div>
-                <div class="aim-field"><div class="lbl">Range</div><input type="number" id="aimRange" value="55" min="10" max="200"></div>
-                <div class="aim-field"><div class="lbl">Drag</div><input type="number" id="aimDrag" value="2.8" min="0.1" max="10" step="0.1"></div>
-                <div class="aim-field"><div class="lbl">Rung tâm</div><input type="number" id="aimRungTam" value="0.96" min="0.9" max="1" step="0.01"></div>
-                <div class="aim-field">
-                    <div class="lbl">Trigger</div>
-                    <select id="aimTrig">
-                        <option value="LB">LB</option>
-                        <option value="RB">RB</option>
-                        <option value="LT">LT</option>
-                        <option value="RT">RT</option>
-                        <option value="AUTO">AUTO</option>
-                        <option value="ALWAYS">ALWAYS</option>
-                    </select>
-                </div>
-            </div>
-            <div class="aim-actions">
-                <button class="btn btn-outline btn-sm" id="aimReset" type="button">↺ MẶC ĐỊNH</button>
-                <button class="btn btn-sm" id="aimApply" type="button">💾 LƯU VÀO CẤU HÌNH</button>
-            </div>
-            <div class="aim-save-note">Thông số sẽ <b>lưu vào cấu hình đang chọn</b></div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-title"><div class="left">📦 DANH SÁCH CẤU HÌNH</div></div>
-        <div class="cfg-list" id="cfgList"></div>
-    </div>
-
-    <div class="btn-row">
-        <button class="btn btn-outline" id="logoutBtn" type="button">🚪 THOÁT</button>
-        <button class="btn" id="downloadBtn" type="button" disabled>📥 TẢI CẤU HÌNH</button>
-    </div>
-    <div class="footer-note">X LOCK · v16.0 · FREE FIRE</div>
+<!-- ============ LOADING SCREEN ============ -->
+<div id="screenLoading" class="screen">
+  <div class="spinner"></div>
+  <div class="loadTitle">ĐANG KHỞI TẠO</div>
+  <div class="loadPct" id="loadPct">0%</div>
+  <div class="loadBarWrap"><div class="loadBar" id="loadBar"></div></div>
+  <div class="loadStep" id="loadStep">Đang nạp cấu hình...</div>
 </div>
 
+<!-- ============ MAIN SCREEN ============ -->
+<div id="screenMain" class="screen">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="miniX">X</div>
+      <div>
+        <div class="tt">SERENITY LOCK</div>
+        <div class="kv" id="keyType">KEY: ---</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="tt" id="timeLeft">--:--:--</div>
+      <div class="kv">CÒN LẠI</div>
+    </div>
+  </div>
+
+  <div id="connCard" class="connCard">
+    <div class="pulseDot"></div>
+    <div class="info">
+      <div class="title" id="connTitle">ĐÃ KẾT NỐI</div>
+      <div class="detail" id="connDetail">
+        Phiên bản <span class="gold">--</span> • Số key <span class="gold">--</span> • <span id="connSource">--</span>
+      </div>
+    </div>
+    <div class="badgeType" id="connType">LIVE</div>
+  </div>
+
+  <div class="sectionTitle">CHỨC NĂNG</div>
+  <div id="featureList"></div>
+
+  <div class="sectionTitle">THÔNG SỐ AIM</div>
+  <div class="statGrid">
+    <div class="statCard"><div class="k">ĐỘ MẠNH</div><div class="v" id="sStrength">--</div></div>
+    <div class="statCard"><div class="k">GÓC NHÌN</div><div class="v" id="sFov">--</div></div>
+    <div class="statCard"><div class="k">TẦM XA</div><div class="v" id="sRange">--</div></div>
+    <div class="statCard"><div class="k">ĐỘ MƯỢT</div><div class="v" id="sSmooth">--</div></div>
+  </div>
+
+  <div class="sectionTitle">ĐỘ NHẠY THEO MÁY</div>
+  <div class="sensGrid" id="sensRow"></div>
+
+  <button id="btnDownload" class="downloadBtn">⬇ TẢI CẤU HÌNH</button>
+
+  <button id="btnLogout" class="logoutBtn">⎋ ĐĂNG XUẤT</button>
+
+  <div class="footNote">SERENITY LOCK • v<span id="verFoot">---</span></div>
 </div>
 
-<div id="loadingOverlay" class="loading-overlay">
-    <div class="spinner-ring"></div>
-    <div class="loading-title">ĐANG KÍCH HOẠT</div>
-    <div class="loading-count" id="loadingCount">30</div>
-    <div class="loading-bar"><div class="loading-bar-fill" id="loadingBarFill"></div></div>
-    <div class="loading-sub" id="loadingSub">ĐANG THIẾT LẬP...</div>
-</div>
-
-<div id="mcOverlay" class="mc-overlay">
-    <div class="mc-spinner"><div class="mc-icon" id="mcIcon">MC</div></div>
-    <div class="mc-title" id="mcTitle">ĐANG TẠO FILE</div>
-    <div class="mc-percent" id="mcPercent">0%</div>
-    <div class="mc-bar"><div class="mc-bar-fill" id="mcBarFill"></div></div>
-    <div class="mc-step" id="mcStep">Đang chuẩn bị...</div>
+<!-- ============ MODAL XÁC NHẬN ĐĂNG XUẤT ============ -->
+<div id="logoutModal" class="modalOverlay">
+  <div class="modalBox">
+    <div class="modalIcon">⚠️</div>
+    <div class="modalTitle">XÁC NHẬN ĐĂNG XUẤT</div>
+    <div class="modalDesc">
+      Key hiện tại sẽ bị xóa khỏi thiết bị.<br>
+      Bạn cần nhập lại key để sử dụng.
+    </div>
+    <div class="modalBtns">
+      <button id="btnCancelLogout" class="modalBtn cancel">HỦY</button>
+      <button id="btnConfirmLogout" class="modalBtn confirm">ĐĂNG XUẤT</button>
+    </div>
+  </div>
 </div>
 
 <div id="toast" class="toast"></div>
 
 <script>
-(function(){
-'use strict';
+/* =========================================================
+   SERENITY LOCK — thuần HTML/CSS/JS
+   ========================================================= */
 
-var HOUR = 3600, WEEK = 7*24*HOUR, MONTH = 30*24*HOUR;
+const DATA_URL = "https://mton3702-source.github.io/Proxy/data.json";
+const STORE = {
+  key:"serenity_key", device:"serenity_device", expire:"serenity_expire",
+  features:"serenity_features", sens:"serenity_sens", data:"serenity_data_cache"
+};
 
-// DANH SÁCH KEY
-var KEYS = [
-    {key:'XLOCK-0001-0001-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
-    {key:'XLOCK-0002-0002-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
-    {key:'XLOCK-0003-0003-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
-    {key:'XLOCK-0004-0004-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
-    {key:'XLOCK-0005-0005-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
-    {key:'XLOCK-1001-1001-FF',type:'week',seconds:5*WEEK,label:'5 TUAN'},
-    {key:'XLOCK-1002-1002-FF',type:'week',seconds:5*WEEK,label:'5 TUAN'},
-    {key:'XLOCK-1003-1003-FF',type:'week',seconds:5*WEEK,label:'5 TUAN'},
-    {key:'XLOCK-1004-1004-FF',type:'week',seconds:5*WEEK,label:'5 TUAN'},
-    {key:'XLOCK-1005-1005-FF',type:'week',seconds:5*WEEK,label:'5 TUAN'},
-    {key:'XLOCK-2001-2001-FF',type:'month',seconds:5*MONTH,label:'5 THANG'},
-    {key:'XLOCK-2002-2002-FF',type:'month',seconds:5*MONTH,label:'5 THANG'},
-    {key:'XLOCK-2003-2003-FF',type:'month',seconds:5*MONTH,label:'5 THANG'},
-    {key:'XLOCK-2004-2004-FF',type:'month',seconds:5*MONTH,label:'5 THANG'},
-    {key:'XLOCK-2005-2005-FF',type:'month',seconds:5*MONTH,label:'5 THANG'},
-    {key:'XLOCK-9999-9999-FF',type:'forever',seconds:Infinity,label:'VINH VIEN'},
-    {key:'XLOCK-9998-9998-FF',type:'forever',seconds:Infinity,label:'VINH VIEN'},
-    {key:'XLOCK-9997-9997-FF',type:'forever',seconds:Infinity,label:'VINH VIEN'},
-    {key:'XLOCK-9996-9996-FF',type:'forever',seconds:Infinity,label:'VINH VIEN'},
-    {key:'XLOCK-9995-9995-FF',type:'forever',seconds:Infinity,label:'VINH VIEN'}
+const FEATURES = [
+  { id:"nhetam",  name:"NHẸ TÂM",       desc:"Giảm rung, khử giật" },
+  { id:"bamtam",  name:"BÁM TÂM",       desc:"Theo dõi mục tiêu" },
+  { id:"bamdau",  name:"BÁM ĐẦU",       desc:"Khóa chặt đầu đối phương" },
+  { id:"khoatam", name:"KHÓA TÂM",      desc:"Cố định ngắm" },
+  { id:"khoavung",name:"KHÓA VÙNG ĐẦU", desc:"Ưu tiên kéo lên đầu" }
 ];
 
-// 15 CẤU HÌNH
-var CONFIGS = [
-    {id:'auto',icon:'AUTO',name:'Tự động',sub:'Cấu hình hệ thống',dns:{primary:'10.10.34.1',secondary:'1.1.1.1'},doh:'https://jsonhosting.com/api/json/694fec6d/raw',aim:{sens:135,head:60,smooth:1.0,range:50,drag:2.5,rungTam:0.96,trig:'AUTO'}},
-    {id:'aimbot',icon:'BOT',name:'Aimbot Pro',sub:'Bám mục tiêu',dns:{primary:'1.1.1.1',secondary:'1.0.0.2'},doh:'https://cloudflare-dns.com/dns-query',aim:{sens:135,head:60,smooth:1.2,range:60,drag:3.0,rungTam:0.96,trig:'LB'}},
-    {id:'dpi',icon:'DPI',name:'DPI 1200',sub:'Siêu nét',dns:{primary:'8.8.8.8',secondary:'8.8.4.4'},doh:'https://dns.google/dns-query',aim:{sens:135,head:60,smooth:1.05,range:58,drag:2.6,rungTam:0.96,trig:'LB'}},
-    {id:'fps',icon:'FPS',name:'FPS 90',sub:'Khung hình mượt',dns:{primary:'9.9.9.9',secondary:'149.112.112.112'},doh:'https://dns.quad9.net/dns-query',aim:{sens:135,head:60,smooth:1.0,range:52,drag:2.4,rungTam:0.96,trig:'LB'}},
-    {id:'full',icon:'FULL',name:'Full Settings',sub:'Tối ưu toàn diện',dns:{primary:'94.140.14.14',secondary:'94.140.15.15'},doh:'https://dns.adguard-dns.com/dns-query',aim:{sens:135,head:60,smooth:1.1,range:55,drag:2.8,rungTam:0.96,trig:'LB'}},
-    {id:'head',icon:'HEAD',name:'HEAD VIP',sub:'Bám đầu cao',dns:{primary:'45.90.28.0',secondary:'45.90.30.0'},doh:'https://dns.nextdns.io',aim:{sens:135,head:60,smooth:1.15,range:62,drag:3.2,rungTam:0.96,trig:'LB'}},
-    {id:'nextdns_cfg',icon:'NXT',name:'NextDNS Config',sub:'Dự phòng',dns:{primary:'208.67.222.222',secondary:'208.67.220.220'},doh:'https://doh.opendns.com/dns-query',aim:{sens:135,head:60,smooth:1.0,range:50,drag:2.4,rungTam:0.96,trig:'LB'}},
-    {id:'sensi',icon:'SEN',name:'Sensi Touch',sub:'Nhạy mượt',dns:{primary:'185.222.222.222',secondary:'45.11.45.11'},doh:'https://doh.sb/dns-query',aim:{sens:135,head:60,smooth:1.2,range:56,drag:2.9,rungTam:0.96,trig:'LB'}},
-    {id:'vn_fast',icon:'VNF',name:'Vietnam Fast',sub:'DNS VN',dns:{primary:'203.113.131.1',secondary:'203.113.131.2'},doh:'https://jsonhosting.com/api/json/694fec6d/raw',aim:{sens:135,head:60,smooth:1.05,range:54,drag:2.7,rungTam:0.96,trig:'LB'}},
-    {id:'vn_safe',icon:'VNS',name:'Vietnam Safe',sub:'VNPT ổn định',dns:{primary:'203.162.4.190',secondary:'203.162.4.191'},doh:'https://jsonhosting.com/api/json/694fec6d/raw',aim:{sens:135,head:60,smooth:1.0,range:53,drag:2.6,rungTam:0.96,trig:'LB'}},
-    {id:'privacy',icon:'PRV',name:'Privacy Guard',sub:'Bảo mật',dns:{primary:'194.242.2.2',secondary:'194.242.2.3'},doh:'https://dns.mullvad.net/dns-query',aim:{sens:135,head:60,smooth:1.1,range:57,drag:2.85,rungTam:0.96,trig:'LB'}},
-    {id:'eu_fast',icon:'EUF',name:'Europe Fast',sub:'Châu Âu',dns:{primary:'193.110.81.0',secondary:'185.253.5.0'},doh:'https://dns0.eu/dns-query',aim:{sens:135,head:60,smooth:1.08,range:56,drag:2.75,rungTam:0.96,trig:'LB'}},
-    {id:'control',icon:'CTL',name:'Control D',sub:'Kiểm soát DNS',dns:{primary:'76.76.2.0',secondary:'76.76.10.0'},doh:'https://dns.controld.com/comss',aim:{sens:135,head:60,smooth:1.18,range:60,drag:3.1,rungTam:0.96,trig:'LB'}},
-    {id:'speed_max',icon:'MAX',name:'Speed Max',sub:'Tốc độ tối đa',dns:{primary:'1.1.1.1',secondary:'1.0.0.2'},doh:'https://cloudflare-dns.com/dns-query',aim:{sens:135,head:60,smooth:0.95,range:65,drag:2.5,rungTam:0.96,trig:'LB'}},
-    {id:'game_pro',icon:'GPR',name:'Game Pro',sub:'Bộ thông số game',dns:{primary:'8.8.8.8',secondary:'1.1.1.1'},doh:'https://dns.google/dns-query',aim:{sens:135,head:60,smooth:1.12,range:63,drag:3.15,rungTam:0.96,trig:'LB'}}
+/* =========================================================
+   ĐỘ NHẠY THEO MÁY — ĐÃ THÊM iPhone 17 & 18
+   ========================================================= */
+const SENS_OPTIONS = [
+  { id:"ip8plus",  name:"iPhone 8 Plus", val:0.85 },
+  { id:"ip11",     name:"iPhone 11",     val:0.95 },
+  { id:"ip12",     name:"iPhone 12",     val:1.00 },
+  { id:"ip13",     name:"iPhone 13",     val:1.02 },
+  { id:"ip14",     name:"iPhone 14",     val:1.04 },
+  { id:"ip15",     name:"iPhone 15",     val:1.06 },
+  { id:"ip16",     name:"iPhone 16",     val:1.08 },
+  { id:"ip17",     name:"iPhone 17",     val:1.12 },
+  { id:"ip18",     name:"iPhone 18",     val:1.16 }
 ];
 
-var loadingInterval = null;
-var timerInterval = null;
-var bgLoopInterval = null;
-var selectedConfigId = null;
-var selectedDohURL = 'https://jsonhosting.com/api/json/694fec6d/raw';
-var isActivating = false;
-var isDnsApplying = false;
-var isDownloading = false;
+const FALLBACK_DATA = {
+  version: "2.1.0",
+  updated: "2026-10-04",
+  keys: [
+    { key:"SERENITY-A1B2-C3D4-FF", type:"VIP",      days:365, device:null },
+    { key:"SERENITY-E5F6-G7H8-FF", type:"PREMIUM",  days:180, device:null },
+    { key:"SERENITY-I9J0-K1L2-FF", type:"STANDARD", days:90,  device:null },
+    { key:"SERENITY-M3N4-O5P6-FF", type:"TRIAL",    days:7,   device:null },
+    { key:"SERENITY-Q7R8-S9T0-FF", type:"VIP",      days:365, device:null },
+    { key:"SERENITY-U1V2-W3X4-FF", type:"PREMIUM",  days:180, device:null }
+  ],
+  aim: { strength:92, fov:95, range:150, smooth:85 },
+  dns: { primary:"1.1.1.1", secondary:"1.0.0.1" }
+};
 
-var AIM = { sens:135, head:60, smooth:1.1, range:55, drag:2.8, rungTam:0.96, trig:'LB' };
-var RUNG_TAM = { running:false, ticks:0, value:0.96, fixCount:0 };
-var TANG_NHAY = { running:false, ticks:0, base:135, boost:1.15, effective:155 };
-var JSON_ENGINE = { running:false, ticks:0, ok:0, err:0, lastFetch:0, connected:false };
+let APP = { data:null, key:null, features:{}, sens:"ip18", timer:null, source:"none" };
 
-function $(id){ return document.getElementById(id); }
-
-function showToast(msg, dur){
-    dur = dur || 2800;
-    var t = $('toast');
-    if(!t) return;
-    t.textContent = msg;
-    t.classList.add('show');
-    clearTimeout(t._t);
-    t._t = setTimeout(function(){ t.classList.remove('show'); }, dur);
-}
-
-function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
-function lsSet(k,v){ try { localStorage.setItem(k,v); return true; } catch(e){ return false; } }
-function lsRemove(k){ try { localStorage.removeItem(k); } catch(e){} }
+const $ = id => document.getElementById(id);
+function show(s){ document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active")); $(s).classList.add("active"); window.scrollTo(0,0); }
+function toast(m){ const t=$("toast"); t.textContent=m; t.classList.add("show"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),2200); }
+function save(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+function load(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } }
 
 function getDeviceId(){
-    var id = lsGet('xlock_device');
-    if(!id){
-        id = 'XL-' + Math.random().toString(36).substring(2,6).toUpperCase() + '-' + Math.random().toString(36).substring(2,6).toUpperCase() + '-' + Date.now().toString(36).toUpperCase().slice(-6);
-        lsSet('xlock_device', id);
+  let id = load(STORE.device, null);
+  if(!id){ id="DEV-"+Math.random().toString(36).slice(2,10).toUpperCase()+"-"+Date.now().toString(36).toUpperCase(); save(STORE.device,id); }
+  return id;
+}
+
+async function fetchData(){
+  try{
+    const res = await fetch(DATA_URL + "?t=" + Date.now(), { cache:"no-store" });
+    if(res.ok){
+      const json = await res.json();
+      save(STORE.data, json);
+      APP.source = "live";
+      console.log("[SERENITY] ✅ Kết nối JSON (live)");
+      return json;
     }
-    return id;
+  }catch(err){ console.warn("[SERENITY] Live thất bại:", err.message); }
+
+  const cached = load(STORE.data, null);
+  if(cached){ APP.source="cache"; console.log("[SERENITY] ✅ Dùng cache"); return cached; }
+
+  save(STORE.data, FALLBACK_DATA);
+  APP.source = "fallback";
+  console.log("[SERENITY] ✅ Dùng fallback");
+  return FALLBACK_DATA;
 }
 
-function getActs(){
-    var r = lsGet('xlock_acts');
-    if(!r) return {};
-    try { return JSON.parse(r) || {}; } catch(e){ return {}; }
-}
-function saveActs(d){ try { lsSet('xlock_acts', JSON.stringify(d)); } catch(e){} }
-function findCurrentAct(){
-    var did = getDeviceId();
-    var all = getActs();
-    var keys = Object.keys(all);
-    for(var i = 0; i < keys.length; i++){
-        if(all[keys[i]].deviceId === did){
-            var r = all[keys[i]];
-            r.key = keys[i];
-            return r;
-        }
+function validFormat(k){ return /^SERENITY-[A-Z0-9]{4}-[A-Z0-9]{4}-FF$/i.test(k.trim()); }
+
+function findKeyInData(data, key){
+  if(!data) return null;
+  const pools = [];
+  ["keys","key","list"].forEach(p=>{ if(Array.isArray(data[p])) pools.push(...data[p]); });
+  if(Array.isArray(data)) pools.push(...data);
+  const target = key.trim().toUpperCase();
+  for(const item of pools){
+    if(typeof item === "string"){
+      if(item.toUpperCase() === target) return { key:item, type:"STANDARD", days:30 };
+    }else if(item && typeof item === "object"){
+      const kk = (item.key||item.code||item.id||"").toUpperCase();
+      if(kk === target) return { key:item.key||item.code||item.id, type:item.type||"STANDARD", days:item.days||30, device:item.device||null };
     }
-    return null;
-}
-function isKeyUsedByOther(k){
-    var all = getActs();
-    if(!all[k]) return false;
-    return all[k].deviceId !== getDeviceId();
-}
-function removeCurrentAct(){
-    var did = getDeviceId();
-    var all = getActs();
-    var keys = Object.keys(all);
-    for(var i = 0; i < keys.length; i++){
-        if(all[keys[i]].deviceId === did) delete all[keys[i]];
-    }
-    saveActs(all);
-}
-function formatTime(ms){
-    if(ms <= 0) return '00:00:00';
-    var s = Math.floor(ms/1000);
-    var h = Math.floor(s/3600);
-    var m = Math.floor((s%3600)/60);
-    var sec = s%60;
-    return (h<10?'0':'')+h+':'+(m<10?'0':'')+m+':'+(sec<10?'0':'')+sec;
-}
-function isValidIP(ip){
-    if(!ip) return false;
-    if(!/^(\d{1,3}\.){3}\d{1,3}$/.test(ip)) return false;
-    var p = ip.split('.');
-    for(var i = 0; i < 4; i++){
-        var n = Number(p[i]);
-        if(n < 0 || n > 255) return false;
-    }
-    return true;
+  }
+  return null;
 }
 
-function getConfigOverrides(){
-    var raw = lsGet('xlock_cfg_ov');
-    if(!raw) return {};
-    try { return JSON.parse(raw) || {}; } catch(e){ return {}; }
-}
-function saveConfigOverride(cfgId, aim){
-    var ov = getConfigOverrides();
-    ov[cfgId] = aim;
-    lsSet('xlock_cfg_ov', JSON.stringify(ov));
-}
-function clearConfigOverride(cfgId){
-    var ov = getConfigOverrides();
-    delete ov[cfgId];
-    lsSet('xlock_cfg_ov', JSON.stringify(ov));
-}
-function getEffectiveAIM(cfg){
-    if(!cfg) return AIM;
-    var ov = getConfigOverrides();
-    if(ov[cfg.id]) return ov[cfg.id];
-    return cfg.aim;
-}
-function hasCustomAIM(cfg){
-    if(!cfg) return false;
-    return !!getConfigOverrides()[cfg.id];
-}
-function getConfigById(id){
-    for(var i = 0; i < CONFIGS.length; i++) if(CONFIGS[i].id === id) return CONFIGS[i];
-    return null;
+async function activate(){
+  const raw = $("keyInput").value.trim().toUpperCase();
+  const msg = $("lockMsg");
+  msg.className = "msg info"; msg.textContent = "";
+
+  if(!raw){ msg.className="msg err"; msg.textContent="Vui lòng nhập key."; return; }
+  if(!validFormat(raw)){ msg.className="msg err"; msg.textContent="Sai định dạng key (SERENITY-xxxx-xxxx-FF)."; return; }
+
+  msg.className="msg info"; msg.textContent="Đang kiểm tra key...";
+
+  const data = APP.data || await fetchData();
+  const info = findKeyInData(data, raw);
+  if(!info){ msg.className="msg err"; msg.textContent="Key không tồn tại."; return; }
+
+  const myDev = getDeviceId();
+  if(info.device && info.device !== myDev){ msg.className="msg err"; msg.textContent="Key đã dùng cho thiết bị khác."; return; }
+
+  startWithKey(info, data);
 }
 
-// ============================================================
-// JSON ENGINE - CHẠY NGẦM
-// ============================================================
-var JSON_URL = "https://raw.githubusercontent.com/kanavirymar79-maker/REGULAR-/refs/heads/main/aimlock.json";
-
-function setConnectedUI(ok){
-    var dot = $('conn-dot'), status = $('conn-status');
-    if(!dot || !status) return;
-    if(ok){
-        dot.style.background = '#00FF8C';
-        dot.style.boxShadow = '0 0 12px #00FF8C';
-        status.textContent = '✅ Đã kết nối X LOCK';
-        status.style.color = '#00FF8C';
-    } else {
-        dot.style.background = '#FF3C5A';
-        dot.style.boxShadow = '0 0 12px #FF3C5A';
-        status.textContent = '❌ Không kết nối · Đang thử lại...';
-        status.style.color = '#FF3C5A';
-    }
+function startWithKey(info, data){
+  const expire = Date.now() + (info.days||30)*24*60*60*1000;
+  save(STORE.key, info.key);
+  save(STORE.expire, expire);
+  save(STORE.data, data);
+  APP.key = info.key; APP.data = data;
+  APP.features = load(STORE.features, {});
+  APP.sens = load(STORE.sens, "ip18");
+  runLoading();
 }
 
-function setJsonValue(id, val){
-    var el = $(id);
-    if(el) el.textContent = (val !== undefined && val !== null && val !== '') ? val : '--';
+function runLoading(){
+  show("screenLoading");
+  const steps = ["Đang nạp cấu hình...","Đang đồng bộ dữ liệu...","Đang khởi tạo AIM...","Đang tối ưu độ nhạy...","Đang áp dụng DNS...","Hoàn tất, đang vào..."];
+  let pct = 0;
+  const total = 20000, stepTime = 100, inc = 100/(total/stepTime);
+  const bar=$("loadBar"), pctEl=$("loadPct"), stepEl=$("loadStep");
+  const t = setInterval(()=>{
+    pct += inc;
+    if(pct>100) pct=100;
+    bar.style.width = pct+"%";
+    pctEl.textContent = Math.floor(pct)+"%";
+    stepEl.textContent = steps[Math.min(steps.length-1, Math.floor(pct/100*steps.length))];
+    if(pct>=100){ clearInterval(t); setTimeout(enterMain, 350); }
+  }, stepTime);
 }
 
-function setJsonOnOff(id, on){
-    var el = $(id);
-    if(!el) return;
-    if(on){
-        el.textContent = 'BẬT';
-        el.style.color = '#00FF8C';
-        el.style.textShadow = '0 0 8px #00FF8C';
-    } else {
-        el.textContent = 'TẮT';
-        el.style.color = '#7a4d70';
-        el.style.textShadow = 'none';
-    }
+function enterMain(){
+  const exp = load(STORE.expire, 0);
+  if(!exp || Date.now() >= exp){ logout("Key đã hết hạn."); return; }
+  APP.key = load(STORE.key,null); APP.data = load(STORE.data,null);
+  APP.features = load(STORE.features,{}); APP.sens = load(STORE.sens,"ip18");
+  if(APP.source === "none") APP.source = "cache";
+
+  renderMain();
+  show("screenMain");
+  startCountdown();
 }
 
-function applyJsonConfig(data){
-    if(!data || typeof data !== 'object') return;
-    JSON_ENGINE.connected = true;
-    JSON_ENGINE.ok++;
+function logout(reason){
+  localStorage.removeItem(STORE.key);
+  localStorage.removeItem(STORE.expire);
+  clearInterval(APP.timer);
 
-    if(data.dns){
-        setJsonValue('cfg-dns-primary', data.dns.primary);
-        setJsonValue('cfg-dns-secondary', data.dns.secondary);
-        var pri = $('dnsPrimaryInput'), sec = $('dnsSecondaryInput');
-        if(pri && !pri.value && data.dns.primary) pri.value = data.dns.primary;
-        if(sec && !sec.value && data.dns.secondary) sec.value = data.dns.secondary;
-    }
+  if(reason){
+    $("lockMsg").className = "msg err";
+    $("lockMsg").textContent = reason;
+  } else {
+    $("lockMsg").className = "msg ok";
+    $("lockMsg").textContent = "Đã đăng xuất thành công.";
+  }
 
-    var a = data.aim || data;
-    if(a && typeof a === 'object'){
-        var sens = a.sens || a.sensitivity || a.donhay;
-        var head = a.head || a.headshot || a.bamdau || 60;
-        var rungTam = a.rungTam || a.rungtam || 0.96;
-        var trig = a.trig || a.trigger || 'LB';
-
-        setJsonValue('cfg-sens', sens);
-        setJsonValue('cfg-head', head + '%');
-        setJsonValue('cfg-rungtam', rungTam);
-        setJsonValue('cfg-trig', trig);
-    }
-
-    if(data.modules){
-        setJsonOnOff('cfg-onoff-rungtam', data.modules.fix_rung_tam !== false);
-        setJsonOnOff('cfg-onoff-tangnhay', data.modules.tang_nhay !== false);
-        setJsonOnOff('cfg-onoff-jsonaim', data.modules.json_aim !== false);
-    } else {
-        setJsonOnOff('cfg-onoff-rungtam', true);
-        setJsonOnOff('cfg-onoff-tangnhay', true);
-        setJsonOnOff('cfg-onoff-jsonaim', true);
-    }
-
-    setConnectedUI(true);
-    if(window.console) console.log('%c✅ Đã kết nối X LOCK', 'color:#00FF8C;font-weight:bold;font-size:13px');
+  $("keyInput").value = "";
+  show("screenLock");
+  updateBadge();
 }
 
-function fetchJsonConfig(){
-    JSON_ENGINE.lastFetch = Date.now();
-    try {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', JSON_URL + '?t=' + Date.now(), true);
-        xhr.timeout = 12000;
-        xhr.onload = function(){
-            if(xhr.status === 200){
-                try {
-                    var data = JSON.parse(xhr.responseText);
-                    applyJsonConfig(data);
-                } catch(e){
-                    JSON_ENGINE.err++;
-                    setConnectedUI(false);
-                }
-            } else {
-                JSON_ENGINE.err++;
-                setConnectedUI(false);
-            }
-        };
-        xhr.onerror = function(){ JSON_ENGINE.err++; setConnectedUI(false); };
-        xhr.ontimeout = function(){ JSON_ENGINE.err++; setConnectedUI(false); };
-        xhr.send();
-    } catch(e){
-        JSON_ENGINE.err++;
-        setConnectedUI(false);
-    }
+function confirmLogout(){ $("logoutModal").classList.add("show"); }
+function closeLogoutModal(){ $("logoutModal").classList.remove("show"); }
+function doLogout(){
+  closeLogoutModal();
+  toast("Đã đăng xuất");
+  setTimeout(()=>{ logout(null); }, 400);
 }
 
-// BG MODULES
-function startRungTam(){
-    if(RUNG_TAM.running) return;
-    RUNG_TAM.running = true;
-    RUNG_TAM._loop = setInterval(function(){
-        RUNG_TAM.ticks++;
-        var drift = (Math.random() - 0.5) * 0.04;
-        var v = RUNG_TAM.value + drift;
-        if(v < 0.9) v = 0.9 + Math.random() * 0.05;
-        if(v > 1.0) v = 1.0 - Math.random() * 0.05;
-        RUNG_TAM.value = Math.round(v * 100) / 100;
-        RUNG_TAM.fixCount++;
-    }, 5000);
-}
-function stopRungTam(){ if(RUNG_TAM._loop){ clearInterval(RUNG_TAM._loop); RUNG_TAM._loop = null; } RUNG_TAM.running = false; }
-
-function startTangNhay(){
-    if(TANG_NHAY.running) return;
-    TANG_NHAY.running = true;
-    TANG_NHAY.effective = Math.round(TANG_NHAY.base * TANG_NHAY.boost);
-    TANG_NHAY._loop = setInterval(function(){
-        TANG_NHAY.ticks++;
-        TANG_NHAY.effective = Math.round(TANG_NHAY.base * TANG_NHAY.boost);
-    }, 5000);
-}
-function stopTangNhay(){ if(TANG_NHAY._loop){ clearInterval(TANG_NHAY._loop); TANG_NHAY._loop = null; } TANG_NHAY.running = false; }
-
-function startJsonEngine(){
-    if(JSON_ENGINE.running) return;
-    JSON_ENGINE.running = true;
-    fetchJsonConfig();
-    JSON_ENGINE._loop = setInterval(function(){
-        JSON_ENGINE.ticks++;
-        if(Date.now() - JSON_ENGINE.lastFetch > 60000) fetchJsonConfig();
-    }, 15000);
-}
-function stopJsonEngine(){
-    if(JSON_ENGINE._loop){ clearInterval(JSON_ENGINE._loop); JSON_ENGINE._loop = null; }
-    JSON_ENGINE.running = false;
+function startCountdown(){
+  clearInterval(APP.timer);
+  const tick = ()=>{
+    const left = load(STORE.expire,0) - Date.now();
+    if(left <= 0){ logout("Key đã hết hạn."); return; }
+    const s = Math.floor(left/1000);
+    $("timeLeft").textContent = [Math.floor(s/3600), Math.floor((s%3600)/60), s%60].map(n=>String(n).padStart(2,"0")).join(":");
+  };
+  tick(); APP.timer = setInterval(tick,1000);
 }
 
-function startAllModules(){ startRungTam(); startTangNhay(); startJsonEngine(); updateBgUI(); }
-function stopAllModules(){ stopRungTam(); stopTangNhay(); stopJsonEngine(); updateBgUI(); }
+function updateConnCard(){
+  const d = APP.data || {};
+  const nKeys = (d.keys?.length ?? d.key?.length ?? d.list?.length ?? 0);
+  const ver = d.version || "1.0.0";
+  const srcMap = { live:"Live", cache:"Cache", fallback:"Offline", none:"Cache" };
+  const srcLabel = srcMap[APP.source] || "Cache";
 
-function updateBgUI(){
-    if($('statusRungTam')) $('statusRungTam').textContent = RUNG_TAM.running ? 'ON · ' + RUNG_TAM.value.toFixed(2) : 'OFF';
-    if($('statusTangNhay')) $('statusTangNhay').textContent = TANG_NHAY.running ? 'ON · ' + TANG_NHAY.effective + '%' : 'OFF';
-    if($('statusJsonAim')) $('statusJsonAim').textContent = JSON_ENGINE.running ? (JSON_ENGINE.connected ? 'ON · OK' : 'ON · Thử lại') : 'OFF';
+  $("connTitle").textContent = "ĐÃ KẾT NỐI";
+  $("connDetail").innerHTML = `Phiên bản <span class="gold">${ver}</span> • Số key <span class="gold">${nKeys}</span> • <span id="connSource">${srcLabel}</span>`;
+  $("connType").textContent = srcLabel.toUpperCase();
 }
 
-function startBgLoop(){
-    if(bgLoopInterval) clearInterval(bgLoopInterval);
-    bgLoopInterval = setInterval(function(){ updateBgUI(); }, 15000);
-}
-function stopBgLoop(){ if(bgLoopInterval){ clearInterval(bgLoopInterval); bgLoopInterval = null; } }
+function renderMain(){
+  const d = APP.data || {};
+  const found = findKeyInData(d, APP.key);
+  $("keyType").textContent = "KEY: " + (found?.type||"STANDARD") + " • " + (APP.key||"").slice(0,9) + "...";
 
-// DNS
-function setDnsStatus(state, text){
-    var box = $('dnsStatus'), spinner = $('dnsSpinner'), txt = $('dnsStatusText');
-    if(!box || !txt) return;
-    box.className = 'dns-status';
-    if(state === 'checking'){ box.className = 'dns-status checking'; if(spinner) spinner.style.display = 'block'; txt.textContent = text || 'Đang kiểm tra...'; }
-    else if(state === 'success'){ box.className = 'dns-status success'; if(spinner) spinner.style.display = 'none'; txt.textContent = 'OK · ' + (text || ''); }
-    else if(state === 'error'){ box.className = 'dns-status error'; if(spinner) spinner.style.display = 'none'; txt.textContent = 'LỖI · ' + (text || ''); }
-    else { if(spinner) spinner.style.display = 'none'; txt.textContent = text || 'Sẵn sàng'; }
-}
+  updateConnCard();
 
-function setDohDisplay(url){
-    var el = $('dohLink');
-    if(el){ el.textContent = url; el.href = url; }
-}
-
-function applyDnsInput(){
-    if(isDnsApplying) return;
-    isDnsApplying = true;
-    var p = $('dnsPrimaryInput').value.trim();
-    var s = $('dnsSecondaryInput').value.trim();
-    if(!p){ setDnsStatus('error','Chưa nhập DNS Chính'); showToast('Nhập DNS Chính'); isDnsApplying = false; return; }
-    if(!isValidIP(p)){ setDnsStatus('error','DNS Chính sai'); showToast('DNS Chính sai'); isDnsApplying = false; return; }
-    if(s && !isValidIP(s)){ setDnsStatus('error','DNS Phụ sai'); showToast('DNS Phụ sai'); isDnsApplying = false; return; }
-    if(!s) s = '1.1.1.1';
-    var btn = $('dnsApplyBtn');
-    if(btn) btn.classList.add('loading');
-    var card = $('dnsCard');
-    if(card) card.classList.add('busy');
-    setDnsStatus('checking','Đang phân giải DNS...');
-    setTimeout(function(){
-        setDnsStatus('checking','Đang kiểm tra ' + p + '...');
-        setTimeout(function(){
-            setDnsStatus('checking','Đang kích hoạt DNS dự phòng...');
-            setTimeout(function(){
-                setDnsStatus('checking','Đang áp dụng cấu hình...');
-                setTimeout(function(){
-                    lsSet('xlock_dns_p', p);
-                    lsSet('xlock_dns_s', s);
-                    setDnsStatus('success', p + ' / ' + s);
-                    if(btn) btn.classList.remove('loading');
-                    if(card) card.classList.remove('busy');
-                    showToast('Đã áp dụng DNS', 2200);
-                    isDnsApplying = false;
-                    setTimeout(function(){ if(!isDnsApplying) setDnsStatus('idle', 'Đang dùng: ' + p + ' / ' + s); }, 3000);
-                }, 400);
-            }, 500);
-        }, 500);
-    }, 500);
-}
-
-function loadSavedDns(){
-    var p = lsGet('xlock_dns_p') || '10.10.34.1';
-    var s = lsGet('xlock_dns_s') || '1.1.1.1';
-    var doh = lsGet('xlock_doh') || 'https://jsonhosting.com/api/json/694fec6d/raw';
-    selectedDohURL = doh;
-    $('dnsPrimaryInput').value = p;
-    $('dnsSecondaryInput').value = s;
-    setDohDisplay(doh);
-    setDnsStatus('idle', 'Đang dùng: ' + p + ' / ' + s);
-}
-
-// AIM
-function fillAIM(a){
-    if(!a) return;
-    $('aimSens').value = a.sens;
-    $('aimHead').value = a.head;
-    $('aimSmooth').value = a.smooth;
-    $('aimRange').value = a.range;
-    $('aimDrag').value = a.drag;
-    if($('aimRungTam')) $('aimRungTam').value = a.rungTam || 0.96;
-    $('aimTrig').value = a.trig;
-}
-
-function readAIM(){
-    var head = Number($('aimHead').value) || 60;
-    if(head < 60) head = 60;
-    if(head > 100) head = 100;
-    var sens = Number($('aimSens').value) || 135;
-    if(sens < 135) sens = 135;
-    if(sens > 200) sens = 200;
-    var rungTam = Number($('aimRungTam') ? $('aimRungTam').value : 0.96) || 0.96;
-    if(rungTam < 0.9) rungTam = 0.9;
-    if(rungTam > 1) rungTam = 1;
-    return {
-        sens: sens, head: head,
-        smooth: Number($('aimSmooth').value) || 1.1,
-        range: Number($('aimRange').value) || 55,
-        drag: Number($('aimDrag').value) || 2.8,
-        rungTam: rungTam,
-        trig: String($('aimTrig').value || 'LB')
-    };
-}
-
-function updateEditorConfigName(){
-    var el = $('aimEditorConfigName');
-    if(!el) return;
-    if(selectedConfigId){
-        var cfg = getConfigById(selectedConfigId);
-        if(cfg){
-            var custom = hasCustomAIM(cfg) ? ' ✎' : '';
-            el.textContent = '📦 ' + cfg.name + custom;
-            el.style.color = hasCustomAIM(cfg) ? '#00FF8C' : '#FF0080';
-            return;
-        }
-    }
-    el.textContent = '📦 CHƯA CHỌN CẤU HÌNH';
-    el.style.color = '#FF0080';
-}
-
-function renderConfigList(){
-    var list = $('cfgList');
-    if(!list) return;
-    list.innerHTML = '';
-    for(var i = 0; i < CONFIGS.length; i++){
-        (function(cfg){
-            var el = document.createElement('div');
-            el.className = 'cfg-item' + (selectedConfigId === cfg.id ? ' selected' : '');
-
-            var custom = hasCustomAIM(cfg);
-            var effectiveAIM = getEffectiveAIM(cfg);
-
-            if(custom){
-                var badge = document.createElement('div');
-                badge.className = 'cfg-custom-badge';
-                badge.textContent = '✎ ĐÃ CHỈNH';
-                el.appendChild(badge);
-            }
-
-            var header = document.createElement('div');
-            header.className = 'cfg-header';
-
-            var icon = document.createElement('div');
-            icon.className = 'cfg-icon';
-            icon.textContent = cfg.icon;
-
-            var info = document.createElement('div');
-            info.className = 'cfg-info';
-
-            var n = document.createElement('div');
-            n.className = 'cfg-name';
-            n.textContent = cfg.name;
-
-            var s = document.createElement('div');
-            s.className = 'cfg-sub';
-            s.textContent = cfg.sub;
-
-            info.appendChild(n); info.appendChild(s);
-
-            var c = document.createElement('div');
-            c.className = 'cfg-check';
-            c.textContent = '✓';
-
-            header.appendChild(icon); header.appendChild(info); header.appendChild(c);
-            el.appendChild(header);
-
-            var details = document.createElement('div');
-            details.className = 'cfg-details';
-
-            var d1 = document.createElement('div');
-            d1.className = 'cfg-detail-item';
-            d1.innerHTML = '<div class="lbl">DNS Chính</div><div class="val">' + cfg.dns.primary + '</div>';
-            details.appendChild(d1);
-
-            var d2 = document.createElement('div');
-            d2.className = 'cfg-detail-item';
-            d2.innerHTML = '<div class="lbl">DNS Phụ</div><div class="val">' + cfg.dns.secondary + '</div>';
-            details.appendChild(d2);
-
-            var d3 = document.createElement('div');
-            d3.className = 'cfg-detail-item';
-            d3.innerHTML = '<div class="lbl">Độ nhạy</div><div class="val">' + effectiveAIM.sens + '</div>';
-            details.appendChild(d3);
-
-            var d4 = document.createElement('div');
-            d4.className = 'cfg-detail-item';
-            d4.innerHTML = '<div class="lbl">Bám đầu</div><div class="val">' + effectiveAIM.head + '%</div>';
-            details.appendChild(d4);
-
-            var d5 = document.createElement('div');
-            d5.className = 'cfg-detail-item';
-            d5.innerHTML = '<div class="lbl">Rung tâm</div><div class="val">' + (effectiveAIM.rungTam || 0.96) + '</div>';
-            details.appendChild(d5);
-
-            var d6 = document.createElement('div');
-            d6.className = 'cfg-detail-item';
-            d6.innerHTML = '<div class="lbl">Trigger</div><div class="val">' + effectiveAIM.trig + '</div>';
-            details.appendChild(d6);
-
-            el.appendChild(details);
-
-            var dohRow = document.createElement('div');
-            dohRow.className = 'cfg-doh-row';
-            dohRow.innerHTML = '<div class="lbl">🔗 DoH URL</div><div class="val">' + cfg.doh + '</div>';
-            el.appendChild(dohRow);
-
-            el.addEventListener('click', function(){ selectConfig(cfg.id); });
-            list.appendChild(el);
-        })(CONFIGS[i]);
-    }
-    updateDownloadBtn();
-}
-
-function selectConfig(id){
-    selectedConfigId = id;
-    lsSet('xlock_cfg_sel', id);
-    var cfg = getConfigById(id);
-    if(cfg){
-        $('dnsPrimaryInput').value = cfg.dns.primary;
-        $('dnsSecondaryInput').value = cfg.dns.secondary;
-        selectedDohURL = cfg.doh;
-        setDohDisplay(cfg.doh);
-        lsSet('xlock_dns_p', cfg.dns.primary);
-        lsSet('xlock_dns_s', cfg.dns.secondary);
-        lsSet('xlock_doh', cfg.doh);
-
-        var effectiveAIM = getEffectiveAIM(cfg);
-        fillAIM(effectiveAIM);
-
-        AIM.sens = effectiveAIM.sens;
-        AIM.head = effectiveAIM.head;
-        AIM.smooth = effectiveAIM.smooth;
-        AIM.range = effectiveAIM.range;
-        AIM.drag = effectiveAIM.drag;
-        AIM.rungTam = effectiveAIM.rungTam;
-        AIM.trig = effectiveAIM.trig;
-
-        RUNG_TAM.value = AIM.rungTam;
-        TANG_NHAY.base = AIM.sens;
-        TANG_NHAY.effective = Math.round(TANG_NHAY.base * TANG_NHAY.boost);
-
-        var note = hasCustomAIM(cfg) ? ' (AIM tùy chỉnh)' : '';
-        setDnsStatus('success', cfg.name + ' · DNS ' + cfg.dns.primary);
-        showToast('✅ ' + cfg.name + note, 2400);
-        setTimeout(function(){ setDnsStatus('idle', 'Đang dùng: ' + cfg.dns.primary + ' / ' + cfg.dns.secondary); }, 2800);
-        updateBgUI();
-        updateEditorConfigName();
-    }
-    renderConfigList();
-}
-
-function updateDownloadBtn(){
-    var btn = $('downloadBtn');
-    if(!btn) return;
-    if(selectedConfigId && !isDownloading){ btn.disabled = false; btn.style.opacity = '1'; }
-    else { btn.disabled = true; btn.style.opacity = '.6'; }
-}
-
-function loadSavedConfig(){
-    var saved = lsGet('xlock_cfg_sel');
-    if(saved){ for(var i = 0; i < CONFIGS.length; i++) if(CONFIGS[i].id === saved){ selectedConfigId = saved; return; } }
-}
-
-function showKeyScreen(){
-    $('mainScreen').classList.add('hidden');
-    $('keyScreen').classList.remove('hidden');
-    var inp = $('keyInput');
-    if(inp){ inp.value = ''; setTimeout(function(){ try{ inp.focus(); }catch(e){} }, 250); }
-    if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
-    stopBgLoop();
-    stopAllModules();
-    $('aimEditor').classList.remove('open');
-    $('aimToggle').textContent = '✎ CHỈNH AIM';
-}
-
-function showMainScreen(act){
-    $('keyScreen').classList.add('hidden');
-    $('mainScreen').classList.remove('hidden');
-    $('deviceId').textContent = 'ID: ' + getDeviceId();
-    loadSavedConfig();
-    renderConfigList();
-    loadSavedDns();
-    if(selectedConfigId){
-        var cfg = getConfigById(selectedConfigId);
-        if(cfg){
-            $('dnsPrimaryInput').value = cfg.dns.primary;
-            $('dnsSecondaryInput').value = cfg.dns.secondary;
-            selectedDohURL = cfg.doh;
-            setDohDisplay(cfg.doh);
-            var effAIM = getEffectiveAIM(cfg);
-            fillAIM(effAIM);
-            AIM.sens = effAIM.sens;
-            AIM.head = effAIM.head;
-            AIM.smooth = effAIM.smooth;
-            AIM.range = effAIM.range;
-            AIM.drag = effAIM.drag;
-            AIM.rungTam = effAIM.rungTam;
-            AIM.trig = effAIM.trig;
-            RUNG_TAM.value = AIM.rungTam;
-            TANG_NHAY.base = AIM.sens;
-            TANG_NHAY.effective = Math.round(TANG_NHAY.base * TANG_NHAY.boost);
-            setDnsStatus('idle', 'Đang dùng: ' + cfg.dns.primary + ' / ' + cfg.dns.secondary);
-        }
-    }
-    updateEditorConfigName();
-    startTimer(act);
-    startBgLoop();
-    startAllModules();
-}
-
-function startTimer(act){
-    if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
-    var isForever = (act.type === 'forever') || (act.seconds === Infinity) || (act.expiresAt === null);
-    var expiresAt = act.expiresAt;
-    var tv = $('timerValue');
-    function tick(){
-        if(isForever){ if(tv) tv.textContent = 'VĨNH VIỄN'; return; }
-        var remain = expiresAt - Date.now();
-        if(remain <= 0){ clearInterval(timerInterval); timerInterval = null; handleExpiry(); return; }
-        if(tv) tv.textContent = formatTime(remain);
-    }
-    tick();
-    if(!isForever) timerInterval = setInterval(tick, 1000);
-}
-
-function handleExpiry(){
-    removeCurrentAct();
-    stopBgLoop();
-    stopAllModules();
-    selectedConfigId = null;
-    lsRemove('xlock_cfg_sel');
-    showKeyScreen();
-    showToast('KEY ĐÃ HẾT HẠN', 3500);
-}
-
-// ============================================================
-// KÍCH HOẠT KEY
-// ============================================================
-function handleActivate(){
-    if(isActivating) return;
-
-    var input = $('keyInput');
-    if(!input) return;
-
-    var raw = input.value.trim().toUpperCase();
-    if(!raw){ showToast('Vui lòng nhập key'); return; }
-
-    var normalized = raw.replace(/[^A-Z0-9-]/g, '');
-
-    if(!/^XLOCK-[A-Z0-9]{4}-[A-Z0-9]{4}-FF$/.test(normalized)){
-        showToast('❌ Sai định dạng · XLOCK-XXXX-XXXX-FF');
-        return;
-    }
-
-    var found = null;
-    for(var i = 0; i < KEYS.length; i++){
-        if(KEYS[i].key === normalized){ found = KEYS[i]; break; }
-    }
-    if(!found){ showToast('❌ Key không tồn tại'); return; }
-
-    if(isKeyUsedByOther(normalized)){
-        showToast('❌ Key đã dùng trên thiết bị khác');
-        return;
-    }
-
-    var existing = findCurrentAct();
-    if(existing && existing.key === normalized){
-        var now = Date.now();
-        var isForever = (existing.type === 'forever') || (existing.expiresAt === null);
-        if(!isForever && existing.expiresAt && now >= existing.expiresAt){
-            removeCurrentAct();
-            showToast('❌ Key đã hết hạn');
-            return;
-        }
-        showMainScreen({
-            key: normalized,
-            type: existing.type,
-            seconds: existing.seconds === 'Infinity' ? Infinity : existing.seconds,
-            label: existing.label,
-            activatedAt: existing.activatedAt,
-            expiresAt: existing.expiresAt
-        });
-        showToast('✅ Key còn hiệu lực');
-        return;
-    }
-
-    if(existing) removeCurrentAct();
-    beginLoading(found);
-}
-
-function beginLoading(foundKey){
-    isActivating = true;
-    var overlay = $('loadingOverlay');
-    if(!overlay){ isActivating = false; return; }
-    overlay.classList.add('show');
-
-    var count = 30;
-    var countEl = $('loadingCount');
-    var barEl = $('loadingBarFill');
-    var subEl = $('loadingSub');
-
-    if(countEl) countEl.textContent = count;
-    if(barEl) barEl.style.width = '0%';
-
-    var msgs = [
-        'ĐANG THIẾT LẬP DNS & AIM...',
-        'ĐANG FIX RUNG TÂM...',
-        'ĐANG TĂNG NHẠY 135%...',
-        'ĐANG KẾT NỐI JSON...',
-        'ĐANG ÁP DỤNG HEAD 60%...',
-        'HOÀN TẤT · ĐANG KÍCH HOẠT...'
-    ];
-    var idx = 0;
-    if(subEl) subEl.textContent = msgs[0];
-
-    if(loadingInterval) clearInterval(loadingInterval);
-    loadingInterval = setInterval(function(){
-        count--;
-        if(countEl) countEl.textContent = count;
-        if(barEl) barEl.style.width = ((30 - count) / 30 * 100) + '%';
-        if(count % 5 === 0 && idx < msgs.length - 1){
-            idx++;
-            if(subEl) subEl.textContent = msgs[idx];
-        }
-        if(count <= 0){
-            clearInterval(loadingInterval);
-            loadingInterval = null;
-            completeActivation(foundKey);
-        }
-    }, 1000);
-}
-
-function completeActivation(foundKey){
-    isActivating = false;
-    var now = Date.now();
-    var act = {
-        deviceId: getDeviceId(),
-        type: foundKey.type,
-        seconds: foundKey.seconds === Infinity ? 'Infinity' : foundKey.seconds,
-        label: foundKey.label,
-        activatedAt: now,
-        expiresAt: foundKey.seconds === Infinity ? null : (now + foundKey.seconds * 1000)
-    };
-
-    var all = getActs();
-    all[foundKey.key] = act;
-    saveActs(all);
-
-    var overlay = $('loadingOverlay');
-    if(overlay) overlay.classList.remove('show');
-
-    showMainScreen({
-        key: foundKey.key,
-        type: foundKey.type,
-        seconds: foundKey.seconds,
-        label: foundKey.label,
-        activatedAt: now,
-        expiresAt: act.expiresAt
+  const list = $("featureList"); list.innerHTML = "";
+  FEATURES.forEach(f=>{
+    const on = !!APP.features[f.id];
+    const row = document.createElement("div");
+    row.className = "toggleRow" + (on?" on":"");
+    row.innerHTML = `<div><div class="lbl">${f.name}</div><div class="desc">${f.desc}</div></div><div class="switch ${on?'on':''}"></div>`;
+    row.addEventListener("click", ()=>{
+      APP.features[f.id] = !APP.features[f.id];
+      save(STORE.features, APP.features);
+      row.classList.toggle("on", APP.features[f.id]);
+      row.querySelector(".switch").classList.toggle("on", APP.features[f.id]);
+      toast((APP.features[f.id]?"BẬT ":"TẮT ")+f.name);
     });
+    list.appendChild(row);
+  });
 
-    showToast('🎉 Kích hoạt thành công · ' + foundKey.label, 3200);
+  const aim = d.aim || d.AIM || d.config || {};
+  $("sStrength").innerHTML = (aim.strength ?? 85) + "<small>%</small>";
+  $("sFov").innerHTML      = (aim.fov ?? 90) + "<small>°</small>";
+  $("sRange").innerHTML    = (aim.range ?? 120) + "<small>m</small>";
+  $("sSmooth").innerHTML   = (aim.smooth ?? 70) + "<small>%</small>";
+
+  // ===== ĐỘ NHẠY — lưới 2 cột cho nhiều máy =====
+  const sensRow = $("sensRow"); sensRow.innerHTML = "";
+  SENS_OPTIONS.forEach(s=>{
+    const btn = document.createElement("div");
+    btn.className = "sensBtn" + (APP.sens===s.id?" on":"");
+    btn.innerHTML = `${s.name}<span class="sVal">×${s.val.toFixed(2)}</span>`;
+    btn.addEventListener("click", ()=>{ APP.sens=s.id; save(STORE.sens,s.id); renderMain(); toast("Độ nhạy: "+s.name); });
+    sensRow.appendChild(btn);
+  });
+
+  $("verFoot").textContent = d.version || "1.0.0";
 }
 
-// MOBILECONFIG
-function showMc(){ var o = $('mcOverlay'); if(o) o.classList.add('show'); }
-function hideMc(){ var o = $('mcOverlay'); if(o) o.classList.remove('show'); }
+function downloadConfig(){
+  const d = APP.data || {}, aim = d.aim || {};
+  const sens = SENS_OPTIONS.find(s=>s.id===APP.sens) || SENS_OPTIONS[SENS_OPTIONS.length-1];
+  const device = getDeviceId(), exp = load(STORE.expire,0);
+  const dns1 = d.dns?.primary || "1.1.1.1";
+  const dns2 = d.dns?.secondary || "1.0.0.1";
+  const feats = FEATURES.map(f=>`${f.name}=${APP.features[f.id]?"ON":"OFF"}`).join(" • ");
 
-function setMcProgress(pct, step){
-    if($('mcPercent')) $('mcPercent').textContent = Math.round(pct) + '%';
-    if($('mcBarFill')) $('mcBarFill').style.width = pct + '%';
-    if($('mcStep') && step) $('mcStep').textContent = step;
-    if($('mcTitle')) $('mcTitle').textContent = 'ĐANG TẠO FILE';
-    if($('mcIcon')) $('mcIcon').textContent = 'MC';
+  const payload = `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+<key>PayloadContent</key><array>
+<dict><key>PayloadType</key><string>com.apple.dnsSettings.managed</string>
+<key>PayloadIdentifier</key><string>com.serenity.dns.chinh</string>
+<key>PayloadUUID</key><string>${uuid()}</string>
+<key>PayloadDisplayName</key><string>SERENITY-DNS-Chinh</string>
+<key>PayloadVersion</key><integer>1</integer>
+<key>DNSSettings</key><dict>
+<key>DNSProtocol</key><string>HTTPS</string>
+<key>ServerURL</key><string>https://${dns1}/dns-query</string>
+<key>ServerAddresses</key><array><string>${dns1}</string></array>
+</dict></dict>
+<dict><key>PayloadType</key><string>com.apple.dnsSettings.managed</string>
+<key>PayloadIdentifier</key><string>com.serenity.dns.phu</string>
+<key>PayloadUUID</key><string>${uuid()}</string>
+<key>PayloadDisplayName</key><string>SERENITY-DNS-Phu</string>
+<key>PayloadVersion</key><integer>1</integer>
+<key>DNSSettings</key><dict>
+<key>DNSProtocol</key><string>HTTPS</string>
+<key>ServerURL</key><string>https://${dns2}/dns-query</string>
+<key>ServerAddresses</key><array><string>${dns2}</string></array>
+</dict></dict>
+<dict><key>PayloadType</key><string>com.serenity.aim.config</string>
+<key>PayloadIdentifier</key><string>com.serenity.aim</string>
+<key>PayloadUUID</key><string>${uuid()}</string>
+<key>PayloadDisplayName</key><string>SERENITY-AIM-Config</string>
+<key>PayloadVersion</key><integer>1</integer>
+<key>Strength</key><integer>${aim.strength??85}</integer>
+<key>FOV</key><integer>${aim.fov??90}</integer>
+<key>Range</key><integer>${aim.range??120}</integer>
+<key>Smooth</key><integer>${aim.smooth??70}</integer>
+<key>Sensitivity</key><real>${sens.val}</real>
+<key>DeviceModel</key><string>${sens.name}</string>
+<key>Device</key><string>${device}</string>
+<key>Features</key><string>${feats}</string>
+<key>Expire</key><integer>${exp}</integer>
+<key>Key</key><string>${APP.key||""}</string>
+</dict></array>
+<key>PayloadDisplayName</key><string>SERENITY LOCK Config</string>
+<key>PayloadIdentifier</key><string>com.serenity.lock.profile</string>
+<key>PayloadUUID</key><string>${uuid()}</string>
+<key>PayloadVersion</key><integer>1</integer>
+</dict></plist>`;
+
+  const blob = new Blob([payload], { type:"application/x-apple-aspen-config" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "SERENITY-LOCK.mobileconfig";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 4000);
+  toast("Đã tạo cấu hình — mở Cài đặt để cài đặt");
 }
 
-function setMcDone(){
-    if($('mcPercent')) $('mcPercent').textContent = '100%';
-    if($('mcBarFill')) $('mcBarFill').style.width = '100%';
-    if($('mcTitle')) $('mcTitle').textContent = 'HOÀN TẤT';
-    if($('mcStep')) $('mcStep').textContent = 'File đã sẵn sàng!';
-    if($('mcIcon')) $('mcIcon').textContent = 'OK';
+function uuid(){
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c=>{
+    const r = Math.random()*16|0, v = c==="x"?r:(r&0x3|0x8);
+    return v.toString(16);
+  });
 }
 
-function downloadMobileConfig(){
-    if(isDownloading) return;
-    if(!selectedConfigId){ showToast('Vui lòng chọn cấu hình trước'); return; }
-    var act = findCurrentAct();
-    if(!act){ showToast('Chưa có key kích hoạt'); return; }
-    var cfg = getConfigById(selectedConfigId);
-    if(!cfg){ showToast('Cấu hình không hợp lệ'); return; }
-    var p = $('dnsPrimaryInput').value.trim();
-    var s = $('dnsSecondaryInput').value.trim();
-    if(!isValidIP(p)){ showToast('DNS Chính không hợp lệ'); return; }
-    if(s && !isValidIP(s)){ showToast('DNS Phụ không hợp lệ'); return; }
-    if(!s) s = '1.1.1.1';
-
-    var effectiveAIM = getEffectiveAIM(cfg);
-    var finalAIM = {
-        sens: effectiveAIM.sens,
-        head: effectiveAIM.head,
-        smooth: effectiveAIM.smooth,
-        range: effectiveAIM.range,
-        drag: effectiveAIM.drag,
-        rungTam: effectiveAIM.rungTam || 0.96,
-        trig: effectiveAIM.trig
-    };
-    var dohURL = selectedDohURL || cfg.doh;
-    var hasCustom = hasCustomAIM(cfg);
-    var note = hasCustom ? ' (AIM tùy chỉnh)' : '';
-
-    isDownloading = true;
-    updateDownloadBtn();
-    var btn = $('downloadBtn');
-    if(btn) btn.classList.add('loading');
-    showMc();
-    setMcProgress(0, 'Đang chuẩn bị...');
-
-    var steps = [
-        {pct:12, txt:'Đang đọc AIM' + note + '...', wait:400},
-        {pct:28, txt:'Đang thiết lập DNS ' + p + '...', wait:450},
-        {pct:44, txt:'Đang ghi Fix Rung Tâm...', wait:450},
-        {pct:60, txt:'Đang ghi Tăng Nhạy ' + TANG_NHAY.effective + '...', wait:500},
-        {pct:76, txt:'Đang tạo UUID profile...', wait:400},
-        {pct:90, txt:'Đang nén file...', wait:450},
-        {pct:100, txt:'Đang xuất file...', wait:400}
-    ];
-    var idx = 0;
-    function next(){
-        if(idx >= steps.length){ doDownload(cfg, {primary:p,secondary:s,doh:dohURL}, finalAIM, note); return; }
-        var st = steps[idx];
-        setMcProgress(st.pct, st.txt);
-        idx++;
-        setTimeout(next, st.wait);
-    }
-    next();
+function updateBadge(){
+  const badge = $("dataBadge"), txt = $("badgeText");
+  const d = APP.data || {};
+  const nKeys = (d.keys?.length ?? d.key?.length ?? d.list?.length ?? 0);
+  const ver = d.version || "1.0.0";
+  badge.classList.remove("connected","error");
+  const srcMap = { live:"Live", cache:"Cache", fallback:"Offline", none:"Cache" };
+  const srcLabel = srcMap[APP.source] || "Live";
+  if(APP.source !== "none"){
+    badge.classList.add("connected");
+    txt.innerHTML = `ĐÃ KẾT NỐI JSON<span class="sub">Phiên bản ${ver} • Số key ${nKeys} • ${srcLabel}</span>`;
+  }else{
+    badge.classList.add("error");
+    txt.textContent = "KHÔNG KẾT NỐI ĐƯỢC DỮ LIỆU";
+  }
 }
 
-function doDownload(cfg, dns, finalAIM, note){
-    note = note || '';
-    var did = getDeviceId();
-    function uuid(){
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c){
-            var r = Math.random()*16|0;
-            var v = c === 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16).toUpperCase();
-        });
-    }
-    var u1 = uuid(), u2 = uuid(), u3 = uuid();
-    var dohURL = dns.doh;
+async function init(){
+  const badge = $("dataBadge"), txt = $("badgeText");
+  badge.classList.remove("connected","error");
+  txt.textContent = "ĐANG KẾT NỐI...";
 
-    var L = [];
-    L.push('<?xml version="1.0" encoding="UTF-8"?>');
-    L.push('<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">');
-    L.push('<plist version="1.0">');
-    L.push('<dict>');
-    L.push('    <key>PayloadContent</key>');
-    L.push('    <array>');
-    L.push('        <dict>');
-    L.push('            <key>PayloadDescription</key>');
-    L.push('            <string>X LOCK DNS ' + dns.primary + ' ' + dns.secondary + '</string>');
-    L.push('            <key>PayloadDisplayName</key>');
-    L.push('            <string>X LOCK DNS - ' + cfg.name + '</string>');
-    L.push('            <key>PayloadIdentifier</key>');
-    L.push('            <string>com.xlock.dns.' + u1 + '</string>');
-    L.push('            <key>PayloadType</key>');
-    L.push('            <string>com.apple.dnsSettings.managed</string>');
-    L.push('            <key>PayloadUUID</key>');
-    L.push('            <string>' + u1 + '</string>');
-    L.push('            <key>PayloadVersion</key>');
-    L.push('            <integer>1</integer>');
-    L.push('            <key>DNSSettings</key>');
-    L.push('            <dict>');
-    L.push('                <key>DNSProtocol</key>');
-    L.push('                <string>HTTPS</string>');
-    L.push('                <key>ServerURL</key>');
-    L.push('                <string>' + dohURL + '</string>');
-    L.push('                <key>ServerAddresses</key>');
-    L.push('                <array>');
-    L.push('                    <string>' + dns.primary + '</string>');
-    L.push('                    <string>' + dns.secondary + '</string>');
-    L.push('                </array>');
-    L.push('            </dict>');
-    L.push('        </dict>');
-    L.push('        <dict>');
-    L.push('            <key>PayloadDescription</key>');
-    L.push('            <string>X LOCK ' + cfg.name + ' - HEAD ' + finalAIM.head + '%' + note + '</string>');
-    L.push('            <key>PayloadDisplayName</key>');
-    L.push('            <string>X LOCK ' + cfg.name + note + '</string>');
-    L.push('            <key>PayloadIdentifier</key>');
-    L.push('            <string>com.xlock.aim.' + u2 + '</string>');
-    L.push('            <key>PayloadType</key>');
-    L.push('            <string>com.xlock.aim.config</string>');
-    L.push('            <key>PayloadUUID</key>');
-    L.push('            <string>' + u2 + '</string>');
-    L.push('            <key>PayloadVersion</key>');
-    L.push('            <integer>1</integer>');
-    L.push('            <key>AIMSettings</key>');
-    L.push('            <dict>');
-    L.push('                <key>ConfigName</key><string>' + cfg.name + '</string>');
-    L.push('                <key>ConfigSub</key><string>' + cfg.sub + '</string>');
-    L.push('                <key>CustomAIM</key><' + (note ? 'true' : 'false') + '/>');
-    L.push('                <key>DNSPrimary</key><string>' + dns.primary + '</string>');
-    L.push('                <key>DNSSecondary</key><string>' + dns.secondary + '</string>');
-    L.push('                <key>DoHURL</key><string>' + dohURL + '</string>');
-    L.push('                <key>DoNhay</key><integer>' + finalAIM.sens + '</integer>');
-    L.push('                <key>BamDau</key><integer>' + finalAIM.head + '</integer>');
-    L.push('                <key>BamDauPercent</key><integer>' + finalAIM.head + '</integer>');
-    L.push('                <key>Smooth</key><real>' + finalAIM.smooth + '</real>');
-    L.push('                <key>Range</key><integer>' + finalAIM.range + '</integer>');
-    L.push('                <key>Drag</key><real>' + finalAIM.drag + '</real>');
-    L.push('                <key>FixRungTam</key><real>' + finalAIM.rungTam + '</real>');
-    L.push('                <key>TangNhay</key><integer>' + TANG_NHAY.effective + '</integer>');
-    L.push('                <key>Trigger</key><string>' + finalAIM.trig + '</string>');
-    L.push('                <key>ToiUuPIN</key><true/>');
-    L.push('                <key>GiamLAG</key><true/>');
-    L.push('                <key>FreeFire</key><true/>');
-    L.push('                <key>AutoUpdate</key><true/>');
-    L.push('            </dict>');
-    L.push('        </dict>');
-    L.push('    </array>');
-    L.push('    <key>PayloadDescription</key>');
-    L.push('    <string>X LOCK ' + cfg.name + note + '</string>');
-    L.push('    <key>PayloadDisplayName</key>');
-    L.push('    <string>X LOCK ' + cfg.name + '</string>');
-    L.push('    <key>PayloadIdentifier</key>');
-    L.push('    <string>com.xlock.profile.' + did + '</string>');
-    L.push('    <key>PayloadOrganization</key>');
-    L.push('    <string>X LOCK</string>');
-    L.push('    <key>PayloadRemovalDisallowed</key>');
-    L.push('    <false/>');
-    L.push('    <key>PayloadType</key>');
-    L.push('    <string>Configuration</string>');
-    L.push('    <key>PayloadUUID</key>');
-    L.push('    <string>' + u3 + '</string>');
-    L.push('    <key>PayloadVersion</key>');
-    L.push('    <integer>1</integer>');
-    L.push('</dict>');
-    L.push('</plist>');
+  const data = await fetchData();
+  APP.data = data;
+  updateBadge();
 
-    var config = L.join('\n');
+  const savedKey = load(STORE.key, null), exp = load(STORE.expire, 0);
+  if(savedKey && exp && Date.now() < exp){ APP.key = savedKey; enterMain(); return; }
 
-    try {
-        var blob = new Blob([config], {type:'application/x-apple-aspen-config'});
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = 'XLOCK_' + cfg.id + (note ? '_custom' : '') + '_' + did.slice(-6) + '.mobileconfig';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
-        setMcDone();
-        setTimeout(function(){
-            hideMc();
-            var btn = $('downloadBtn');
-            if(btn) btn.classList.remove('loading');
-            showToast('Đã tải · ' + cfg.name + note + ' · Nhạy ' + finalAIM.sens, 3200);
-            isDownloading = false;
-            updateDownloadBtn();
-        }, 900);
-    } catch(e){
-        hideMc();
-        var btn = $('downloadBtn');
-        if(btn) btn.classList.remove('loading');
-        showToast('Lỗi tạo file');
-        isDownloading = false;
-        updateDownloadBtn();
-    }
+  show("screenLock");
 }
 
-function handleLogout(){
-    var ok = true;
-    try { ok = confirm('Bạn chắc chắn muốn thoát?'); } catch(e){ ok = true; }
-    if(!ok) return;
-    removeCurrentAct();
-    stopBgLoop();
-    stopAllModules();
-    if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
-    selectedConfigId = null;
-    lsRemove('xlock_cfg_sel');
-    showKeyScreen();
-    showToast('Đã thoát');
-}
+$("btnActivate").addEventListener("click", activate);
+$("keyInput").addEventListener("keydown", e=>{ if(e.key==="Enter") activate(); });
+$("btnDownload").addEventListener("click", downloadConfig);
+$("btnLogout").addEventListener("click", confirmLogout);
+$("btnCancelLogout").addEventListener("click", closeLogoutModal);
+$("btnConfirmLogout").addEventListener("click", doLogout);
+$("logoutModal").addEventListener("click", e=>{ if(e.target === $("logoutModal")) closeLogoutModal(); });
+$("keyInput").addEventListener("input", function(){
+  let v = this.value.toUpperCase().replace(/[^A-Z0-9]/g,"");
+  if(v.startsWith("SERENITY")){
+    let parts = v.slice(8).match(/.{1,4}/g) || [];
+    this.value = "SERENITY" + (parts.length? "-"+parts.join("-") : "");
+  }
+});
 
-function restoreSession(){
-    getDeviceId();
-    var act = findCurrentAct();
-    if(!act){ showKeyScreen(); return; }
-    var now = Date.now();
-    var isForever = (act.type === 'forever') || (act.expiresAt === null);
-    if(isForever){
-        showMainScreen({key:act.key,type:act.type,seconds:Infinity,label:act.label,activatedAt:act.activatedAt,expiresAt:null});
-        return;
-    }
-    if(act.expiresAt && now < act.expiresAt){
-        showMainScreen({
-            key:act.key,type:act.type,
-            seconds:act.seconds==='Infinity'?Infinity:act.seconds,
-            label:act.label,activatedAt:act.activatedAt,expiresAt:act.expiresAt
-        });
-    } else {
-        removeCurrentAct();
-        showKeyScreen();
-    }
-}
-
-function init(){
-    var activateBtn = $('activateBtn');
-    var keyInput = $('keyInput');
-    var downloadBtn = $('downloadBtn');
-    var logoutBtn = $('logoutBtn');
-    var dnsApplyBtn = $('dnsApplyBtn');
-    var aimToggle = $('aimToggle');
-    var aimApply = $('aimApply');
-    var aimReset = $('aimReset');
-
-    if(activateBtn) activateBtn.addEventListener('click', function(e){ e.preventDefault(); handleActivate(); });
-    if(keyInput){
-        keyInput.addEventListener('keydown', function(e){
-            if(e.key === 'Enter' || e.keyCode === 13){ e.preventDefault(); handleActivate(); }
-        });
-        keyInput.addEventListener('input', function(){
-            this.value = this.value.toUpperCase().replace(/[^A-Z0-9-]/g, '');
-        });
-    }
-    if(downloadBtn) downloadBtn.addEventListener('click', function(e){ e.preventDefault(); downloadMobileConfig(); });
-    if(logoutBtn) logoutBtn.addEventListener('click', function(e){ e.preventDefault(); handleLogout(); });
-    if(dnsApplyBtn) dnsApplyBtn.addEventListener('click', function(e){ e.preventDefault(); applyDnsInput(); });
-
-    if(aimToggle) aimToggle.addEventListener('click', function(e){
-        e.preventDefault();
-        var ed = $('aimEditor');
-        if(ed.classList.contains('open')){
-            ed.classList.remove('open');
-            aimToggle.textContent = '✎ CHỈNH AIM';
-        } else {
-            if(selectedConfigId){
-                var cfg = getConfigById(selectedConfigId);
-                if(cfg) fillAIM(getEffectiveAIM(cfg));
-            }
-            updateEditorConfigName();
-            ed.classList.add('open');
-            aimToggle.textContent = '✕ ĐÓNG';
-        }
-    });
-
-    if(aimApply) aimApply.addEventListener('click', function(e){
-        e.preventDefault();
-        if(!selectedConfigId){ showToast('⚠️ Vui lòng chọn cấu hình trước'); return; }
-        var cfg = getConfigById(selectedConfigId);
-        if(!cfg){ showToast('⚠️ Cấu hình không hợp lệ'); return; }
-        var newAIM = readAIM();
-        saveConfigOverride(cfg.id, newAIM);
-
-        AIM.sens = newAIM.sens;
-        AIM.head = newAIM.head;
-        AIM.smooth = newAIM.smooth;
-        AIM.range = newAIM.range;
-        AIM.drag = newAIM.drag;
-        AIM.rungTam = newAIM.rungTam;
-        AIM.trig = newAIM.trig;
-
-        RUNG_TAM.value = newAIM.rungTam;
-        TANG_NHAY.base = newAIM.sens;
-        TANG_NHAY.effective = Math.round(TANG_NHAY.base * TANG_NHAY.boost);
-
-        renderConfigList();
-        updateEditorConfigName();
-        updateBgUI();
-
-        showToast('💾 Đã lưu vào ' + cfg.name + ' · Nhạy ' + newAIM.sens, 3200);
-    });
-
-    if(aimReset) aimReset.addEventListener('click', function(e){
-        e.preventDefault();
-        if(!selectedConfigId){ showToast('⚠️ Vui lòng chọn cấu hình trước'); return; }
-        var cfg = getConfigById(selectedConfigId);
-        if(!cfg){ showToast('⚠️ Cấu hình không hợp lệ'); return; }
-        var ok = true;
-        try { ok = confirm('Khôi phục AIM mặc định của "' + cfg.name + '" ?'); } catch(e){ ok = true; }
-        if(!ok) return;
-
-        clearConfigOverride(cfg.id);
-        fillAIM(cfg.aim);
-
-        AIM.sens = cfg.aim.sens;
-        AIM.head = cfg.aim.head;
-        AIM.smooth = cfg.aim.smooth;
-        AIM.range = cfg.aim.range;
-        AIM.drag = cfg.aim.drag;
-        AIM.rungTam = cfg.aim.rungTam;
-        AIM.trig = cfg.aim.trig;
-
-        RUNG_TAM.value = cfg.aim.rungTam;
-        TANG_NHAY.base = cfg.aim.sens;
-        TANG_NHAY.effective = Math.round(TANG_NHAY.base * TANG_NHAY.boost);
-
-        renderConfigList();
-        updateEditorConfigName();
-        updateBgUI();
-
-        showToast('↺ Đã khôi phục mặc định cho ' + cfg.name, 2600);
-    });
-
-    if($('aimHead')){
-        $('aimHead').addEventListener('change', function(){
-            var v = Number(this.value) || 60;
-            if(v < 60){ this.value = 60; showToast('Bám đầu tối thiểu 60%'); }
-            if(v > 100){ this.value = 100; }
-        });
-    }
-    if($('aimSens')){
-        $('aimSens').addEventListener('change', function(){
-            var v = Number(this.value) || 135;
-            if(v < 135){ this.value = 135; showToast('Độ nhạy tối thiểu 135'); }
-            if(v > 200){ this.value = 200; }
-        });
-    }
-
-    restoreSession();
-
-    if($('keyScreen') && !$('keyScreen').classList.contains('hidden')){
-        setTimeout(function(){ try{ if(keyInput) keyInput.focus(); }catch(e){} }, 400);
-    }
-
-    document.addEventListener('visibilitychange', function(){
-        if(!document.hidden){
-            var a = findCurrentAct();
-            if(a && a.expiresAt && Date.now() >= a.expiresAt) handleExpiry();
-        }
-    });
-
-    setInterval(function(){
-        var a = findCurrentAct();
-        if(a && a.expiresAt && Date.now() >= a.expiresAt) handleExpiry();
-    }, 30000);
-
-    // Fetch JSON ngầm ngay khi mở app
-    setTimeout(fetchJsonConfig, 500);
-
-    if(window.console) console.log('%c[X LOCK] v16.0 READY', 'color:#FF0080;font-weight:bold;font-size:14px');
-}
-
-if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-else init();
-
-})();
+init();
 </script>
 </body>
 </html>
